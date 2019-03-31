@@ -4,6 +4,7 @@ import main.server.database.dto.Hello;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,6 +14,7 @@ public class HelloController {
 
     private List<Hello> values = new LinkedList<>();
 
+    //http://localhost:8080/tai-app/hello
     @RequestMapping("/hello")
     public String hello(Model model){
         values.add(new Hello("trzy",3));
