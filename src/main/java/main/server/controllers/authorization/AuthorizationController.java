@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class AuthorizationController {
 
@@ -18,7 +20,9 @@ public class AuthorizationController {
     private PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String getLogin(Model model){
+    public String getLogin(HttpServletRequest request, Model model){
+        if(request.getParameter("error") != null)
+            model.addAttribute("error","Bad login or bad password");
         model.addAttribute("user",new User());
         return "login";
     }

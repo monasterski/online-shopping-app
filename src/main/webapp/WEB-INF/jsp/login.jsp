@@ -10,10 +10,12 @@
 </head>
 <body>
 
-
     <div style="max-width:20%; margin-top: 10%; margin-left: auto; margin-right: auto;">
     <sf:form method="POST" modelAttribute="user">
       <div class="form-groups">
+        <div class="col text-danger font-weight-bold" style="margin-bottom:3%; text-align:center;">
+            <c:out value="${error}"/>
+        </div>
         <div class="col" style="margin-bottom:3%">
             <sf:input path="username" type="text" class="form-control" placeholder="Login"/>
         </div>
