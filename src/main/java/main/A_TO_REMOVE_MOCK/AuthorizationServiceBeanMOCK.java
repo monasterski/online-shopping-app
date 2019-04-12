@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class AuthorizationServiceBeanMOCK implements AuthorizationService {
 
     private static long id = 0;
-    private HashMap<String, User> map = new HashMap();
+    private static HashMap<String, User> map = new HashMap<>();
 
     @Override
     public User getUser(String username) {

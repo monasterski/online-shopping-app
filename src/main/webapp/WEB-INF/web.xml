@@ -8,6 +8,8 @@
         </servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <!-- FOR XML BEAN CONFIGURAITION -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>

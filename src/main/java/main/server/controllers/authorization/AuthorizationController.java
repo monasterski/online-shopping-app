@@ -16,18 +16,21 @@ public class AuthorizationController {
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String getLogin(Model model){
+        System.out.println(authorizationService.toString());
         model.addAttribute("user",new User());
         return "login";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String getRegister(Model model){
+        System.out.println("GET " + authorizationService.toString());
         model.addAttribute("user",new User());
         return "register";
     }
 
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public String postRegister(User user){
+        System.out.println("POST "+authorizationService.toString());
         authorizationService.registerUser(user);
         return "redirect:/login";
     }

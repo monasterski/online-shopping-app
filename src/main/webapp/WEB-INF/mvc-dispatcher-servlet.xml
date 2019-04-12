@@ -8,9 +8,4 @@
 
     <context:component-scan base-package = "main" />
 
-    <bean id = "AuthorizationServiceBeanMOCK" class = "main.A_TO_REMOVE_MOCK.AuthorizationServiceBeanMOCK" scope = "singleton">
-    </bean>
-    <bean id = "UserLoginService" class = "main.configuration.security.UserLoginService" scope = "singleton">
-    </bean>
-
 </beans>
