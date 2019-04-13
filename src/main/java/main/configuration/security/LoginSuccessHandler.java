@@ -9,6 +9,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -30,9 +31,16 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
             Field field = handler.getClass().getDeclaredField("requestCache");
             field.setAccessible(true);
-            String redirect = ((RequestCache) field.get(handler))
-                    .getRequest(request,httpServletResponse).getRedirectUrl();
-            String url = "/user/initContext?redirect=" + redirect
+            String redirectPath = request.getRequestURI().substring(0,request.getRequestURI().lastIndexOf("/"));
+            //TODO Jakby nie działał redirect to poprostu getRedirectURI wziac a nie URL
+            SavedRequest savedRequest = ((RequestCache) field.get(handler))
+                    .getRequest(request,httpServletResponse);
+            if(savedRequest == null){
+                httpServletResponse.sendRedirect(redirectPath);
+                return;
+            }
+            String redirect = savedRequest.getRedirectUrl();
+            String url = redirectPath + "/user/initContext?redirect=" + redirect
                     + "&username=" + request.getParameter("username")
                     + "&token=" + encoder.encode(request.getParameter("password"));
             httpServletResponse.sendRedirect(url);
