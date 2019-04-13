@@ -29,7 +29,12 @@
         </ul>
 
 
-        <div class="form-inline my-2 my-lg-0">
+          <div class="form-inline my-2 my-lg-0">
+              <a href="<c:url value="/user/search" />">
+                  <button class="btn btn-outline-success my-2 my-sm-0">Wyszukaj</button>
+              </a>
+          </div>
+          <div class="form-inline my-2 my-lg-0">
             <a href="<c:url value="/user/busket" />">
                 <button class="btn btn-outline-success my-2 my-sm-0">Moje produkty</button>
             </a>
