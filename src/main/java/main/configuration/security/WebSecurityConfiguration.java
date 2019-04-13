@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebMvcSecurity
@@ -18,20 +19,21 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService service;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthenticationSuccessHandler successHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .loginPage("/login").permitAll()
+                //successHandel lets me to do stuff after /login post method which is managed by spring security
+                //atfer successfull loging in
+                .loginPage("/login").successHandler(successHandler).permitAll()
                 .and()
-                    .authorizeRequests().antMatchers("/register").permitAll()
+                    .authorizeRequests().antMatchers("/user/**").authenticated()
                 .and()
-                    .authorizeRequests().antMatchers("/**").permitAll()
-                .and()
-                    .authorizeRequests().anyRequest().authenticated()
+                    .authorizeRequests().anyRequest().permitAll()
                 .and()
                     .logout()
                     .logoutSuccessUrl("/login")

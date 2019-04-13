@@ -1,6 +1,7 @@
 package main.server.controllers.authorization;
 
 import main.server.beans.services.AuthorizationService;
+import main.server.controllers.AbstractController;
 import main.server.database.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,11 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class AuthorizationController {
+public class AuthorizationController extends AbstractController {
 
     @Autowired
     private AuthorizationService authorizationService;
@@ -38,5 +40,19 @@ public class AuthorizationController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         authorizationService.registerUser(user);
         return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/user/initContext",method = RequestMethod.GET)
+    private String init(
+            @RequestParam("token") String accessToken,
+            @RequestParam("username") String username,
+            @RequestParam("redirect") String redirect
+    ){
+        String token = authorizationService.getUser(username).getPassword();
+        if(token.equals(accessToken)) {
+            getApplicationContext().initContext(username);
+            return "redirect:" + redirect;
+        }
+        throw new IllegalArgumentException("Access token is not valid");
     }
 }

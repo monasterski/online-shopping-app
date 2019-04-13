@@ -11,17 +11,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Controller
-public class HelloController {
+@RequestMapping("/user")
+public class HelloController extends AbstractController {
 
     private List<Hello> values = new LinkedList<>();
 
     //http://localhost:8080/tai-app/hello
     @RequestMapping(value = "/hello",method = RequestMethod.GET)
     public String hello(Model model){
-        values.add(new Hello("trzy",3));
-        values.add(new Hello("jeden",1));
-        values.add(new Hello("dwa",2));
-        model.addAttribute("values",values);
+        model.addAttribute("username",getApplicationContext().getUsername());
         return "hello";
     }
 

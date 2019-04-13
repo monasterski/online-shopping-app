@@ -2,18 +2,27 @@ package main.A_TO_REMOVE_MOCK;
 
 import main.server.beans.services.AuthorizationService;
 import main.server.database.dto.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 
 public class AuthorizationServiceBeanMOCK implements AuthorizationService {
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private static long id = 0;
     private static HashMap<String, User> map = new HashMap<>();
 
     @Override
     public User getUser(String username) {
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword(passwordEncoder.encode("admin"));
+        registerUser(user);
         return map.get(username);
     }
 

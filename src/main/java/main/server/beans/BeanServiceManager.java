@@ -1,14 +1,14 @@
 package main.server.beans;
 
 import main.A_TO_REMOVE_MOCK.AuthorizationServiceBeanMOCK;
-import main.configuration.security.HashPasswordEncoder;
 import main.configuration.security.UserLoginService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import main.server.beans.services.AuthorizationService;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import main.server.controllers.authorization.ApplicationContext;
 
 @Configuration
 public class BeanServiceManager {
@@ -24,7 +24,8 @@ public class BeanServiceManager {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new HashPasswordEncoder();
+    @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public ApplicationContext applicationContext() {
+        return new ApplicationContext();
     }
 }
