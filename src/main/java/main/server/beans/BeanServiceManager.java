@@ -1,7 +1,7 @@
 package main.server.beans;
 
-import main.A_TO_REMOVE_MOCK.AuthorizationServiceBeanMOCK;
 import main.configuration.security.UserLoginService;
+import main.server.beans.services.AuthorizationServiceBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -20,7 +20,7 @@ public class BeanServiceManager {
 
     @Bean
     public AuthorizationService authorizationService(){
-        return new AuthorizationServiceBeanMOCK();
+        return new AuthorizationServiceBean();
     }
 
     @Bean

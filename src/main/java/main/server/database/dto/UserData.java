@@ -1,47 +1,41 @@
 package main.server.database.dto;
 
+import main.server.database.AbstractData;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "USERS")
-public class UserData {
+public class UserData extends AbstractData {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     @Column(name = "USER_ID")
-    private Long userId;
-    @Column(name = "USER_LOGIN")
-    private String login;
+    private Long id;
+    @Column(name = "USER_NAME")
+    private String username;
     @Column(name = "USER_PASSWORD")
     private String password;
     @Column(name = "USER_ROLE")
     private int userRole;
 
+    public UserData() {}
 
-    public UserData() {
-        this.login = "login";
-        this.password = "pass";
+    @Override
+    public Long getId() {
+        return id;
     }
 
-    public UserData(String login,String password){
-        this.login = login;
-        this.password = password;
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String login) {
+        this.username = login;
     }
 
     public String getPassword() {
@@ -58,5 +52,10 @@ public class UserData {
 
     public void setUserRole(int userRole) {
         this.userRole = userRole;
+    }
+
+    @Override
+    public String toString() {
+        return id + " : " + username;
     }
 }
