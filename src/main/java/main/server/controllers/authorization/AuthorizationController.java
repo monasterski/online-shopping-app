@@ -2,7 +2,7 @@ package main.server.controllers.authorization;
 
 import main.server.beans.services.AuthorizationService;
 import main.server.controllers.AbstractController;
-import main.server.database.dto.User;
+import main.server.controllers.data.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

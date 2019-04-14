@@ -1,11 +1,9 @@
 package main.A_TO_REMOVE_MOCK;
 
 import main.server.beans.services.AuthorizationService;
-import main.server.database.dto.User;
+import main.server.controllers.data.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 

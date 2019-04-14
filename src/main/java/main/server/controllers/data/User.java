@@ -1,4 +1,4 @@
-package main.server.database.dto;
+package main.server.controllers.data;
 
 public class User {
 

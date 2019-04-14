@@ -1,7 +1,8 @@
-package main.server.controllers;
+package main.server.controllers.products;
 
 
-import main.server.database.dto.Search;
+import main.server.controllers.AbstractController;
+import main.server.controllers.data.Search;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,13 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user/search")
+@RequestMapping("/search")
 public class SearchController extends AbstractController {
 
     @RequestMapping(method= RequestMethod.GET)
@@ -27,11 +29,11 @@ public class SearchController extends AbstractController {
     }
     @RequestMapping(method= RequestMethod.POST)
     public String processSearchTerm(Search search) {
-        return "redirect:/user/search/" + search.getSearchString();
+        return "redirect:/search/criteria/?searchString=" + search.getSearchString();
     }
 
-    @RequestMapping(value = "/{searchString}", method = RequestMethod.GET)
-    public String printResults(@PathVariable("searchString") String searchString, Model model){
+    @RequestMapping(value = "/criteria", method = RequestMethod.GET)
+    public String printResults(@RequestParam("searchString") String searchString, Model model){
         try{
             Document doc = Jsoup.connect("https://www.olx.pl/oferty/q-"+searchString).get();
             Elements table = doc.select("a.marginright5").select("strong");

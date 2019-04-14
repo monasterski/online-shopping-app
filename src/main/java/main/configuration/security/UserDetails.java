@@ -1,6 +1,6 @@
 package main.configuration.security;
 
-import main.server.database.dto.User;
+import main.server.controllers.data.User;
 import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 

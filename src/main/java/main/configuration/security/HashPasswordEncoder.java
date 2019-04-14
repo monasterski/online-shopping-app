@@ -1,8 +1,6 @@
 package main.configuration.security;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-//import sun.security.util.Password;
-
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
