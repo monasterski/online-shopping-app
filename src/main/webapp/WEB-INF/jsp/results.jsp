@@ -15,7 +15,9 @@
 <div style="max-width:40%; margin-left: auto; margin-right: auto;">
     <c:forEach var="result" items="${resultsList}" >
         <li>
-        <td><c:out value="${result}" /></td>
+        <a href="<c:url value="/product?productUrl=${result.url}"/>">
+            <td><c:out value="${result.name}" /></td>
+        </a>
         </li>
     </c:forEach>
 

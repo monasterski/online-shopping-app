@@ -2,6 +2,8 @@ package main.server.beans;
 
 import main.configuration.security.UserLoginService;
 import main.server.beans.services.AuthorizationServiceBean;
+import main.server.beans.services.ShopWebsiteService;
+import main.server.beans.services.ShopWebsiteServiceBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -9,6 +11,10 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import main.server.beans.services.AuthorizationService;
 import main.server.controllers.authorization.ApplicationContext;
+import org.springframework.ui.Model;
+
+import java.util.Collection;
+import java.util.Map;
 
 @Configuration
 public class BeanServiceManager {
@@ -24,8 +30,12 @@ public class BeanServiceManager {
     }
 
     @Bean
+    public ShopWebsiteService shopWebsiteService(){ return new ShopWebsiteServiceBean(); }
+
+    @Bean
     @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public ApplicationContext applicationContext() {
         return new ApplicationContext();
     }
+
 }

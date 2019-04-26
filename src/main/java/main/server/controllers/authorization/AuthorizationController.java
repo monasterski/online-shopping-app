@@ -2,6 +2,8 @@ package main.server.controllers.authorization;
 
 import main.server.beans.services.AuthorizationService;
 import main.server.controllers.AbstractController;
+import main.server.controllers.IgnoreAdvice;
+import main.server.controllers.data.Search;
 import main.server.controllers.data.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+@IgnoreAdvice
 @Controller
 public class AuthorizationController extends AbstractController {
 

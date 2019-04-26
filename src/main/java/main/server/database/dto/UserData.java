@@ -3,6 +3,7 @@ package main.server.database.dto;
 import main.server.database.AbstractData;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "USERS")
@@ -17,6 +18,9 @@ public class UserData extends AbstractData {
     private String password;
     @Column(name = "USER_ROLE")
     private int userRole;
+
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "userId")
+    private List<ProductData> products;
 
     public UserData() {}
 
@@ -57,5 +61,13 @@ public class UserData extends AbstractData {
     @Override
     public String toString() {
         return id + " : " + username;
+    }
+
+    public List<ProductData> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductData> products) {
+        this.products = products;
     }
 }

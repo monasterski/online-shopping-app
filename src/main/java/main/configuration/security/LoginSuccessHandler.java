@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.savedrequest.DefaultSavedRequest;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
@@ -26,20 +27,15 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse httpServletResponse
-            ,Authentication authentication) throws IOException, ServletException {
+            ,Authentication authentication) {
         try {
 
             Field field = handler.getClass().getDeclaredField("requestCache");
             field.setAccessible(true);
             String redirectPath = request.getRequestURI().substring(0,request.getRequestURI().lastIndexOf("/"));
-            //TODO Jakby nie działał redirect to poprostu getRedirectURI wziac a nie URL
-            SavedRequest savedRequest = ((RequestCache) field.get(handler))
-                    .getRequest(request,httpServletResponse);
-            if(savedRequest == null){
-                httpServletResponse.sendRedirect(redirectPath);
-                return;
-            }
-            String redirect = savedRequest.getRedirectUrl();
+            DefaultSavedRequest savedRequest = ((DefaultSavedRequest)((RequestCache) field.get(handler))
+                    .getRequest(request,httpServletResponse));
+            String redirect = savedRequest == null ? "/" : savedRequest.getRequestURI();
             String url = redirectPath + "/user/initContext?redirect=" + redirect
                     + "&username=" + request.getParameter("username")
                     + "&token=" + encoder.encode(request.getParameter("password"));

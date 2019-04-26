@@ -11,13 +11,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class UserDAO extends AbstractDAO<UserData> {
 
     private static PasswordEncoder passwordEncoder = new HashPasswordEncoder();
-    private static UserDAO dao = new UserDAO(UserData.class);
+    private static UserDAO dao = new UserDAO();
 
     public static synchronized UserDAO getInstance(){
         return dao;
     }
 
-    private UserDAO(Class<UserData> data) { super(data);}
+    private UserDAO() { super(UserData.class);}
 
     public UserData getItem(String username){
         Session session = getInstance().getSessionFactory().openSession();

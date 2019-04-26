@@ -30,12 +30,13 @@
 
 
         <div style="padding-right: 1%" class="form-inline my-2 my-lg-0">
-           <a href="<c:url value="/search" />">
-              <button class="btn btn-outline-success my-2 my-sm-0">Wyszukaj</button>
-           </a>
+            <sf:form method="POST" class="form-inline" modelAttribute="search" action="/search">
+                <sf:input path="searchString" type="text" class="form-control" placeholder="Search term"/>
+                <input id="button" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:5%" value="Szukaj" type="submit"/>
+            </sf:form>
         </div>
         <div class="form-inline my-2 my-lg-0">
-          <a href="<c:url value="/user/busket" />">
+          <a href="<c:url value="/user/basket" />">
              <button class="btn btn-outline-success my-2 my-sm-0">Moje produkty</button>
           </a>
         </div>

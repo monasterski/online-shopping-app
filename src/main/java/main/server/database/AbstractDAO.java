@@ -9,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 import org.reflections.Reflections;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
@@ -41,7 +42,9 @@ public abstract class AbstractDAO<DATA> {
             configuration.configure();
             Properties properties = configuration.getProperties();
             ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(properties).buildServiceRegistry();
-            return configuration.buildSessionFactory(serviceRegistry);
+            SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            sessionFactory.openSession();
+            return sessionFactory;
 
         }catch (Exception e){ e.printStackTrace(); }
         return null;

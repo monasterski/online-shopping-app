@@ -18,9 +18,6 @@ import java.util.Properties;
 @SpringBootApplication
 public class Main {
 
-    private static SessionFactory sessionFactory = null;
-    private static ServiceRegistry serviceRegistry = null;
-
     public static void main(String args[]) throws ClassNotFoundException {
         System.out.println("Hello");
         SpringApplication.run(Main.class,args);
