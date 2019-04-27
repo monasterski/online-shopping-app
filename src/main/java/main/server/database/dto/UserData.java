@@ -4,6 +4,7 @@ import main.server.database.AbstractData;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
@@ -20,7 +21,7 @@ public class UserData extends AbstractData {
     private int userRole;
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "userId")
-    private List<ProductData> products;
+    private Set<ProductData> products;
 
     public UserData() {}
 
@@ -63,11 +64,11 @@ public class UserData extends AbstractData {
         return id + " : " + username;
     }
 
-    public List<ProductData> getProducts() {
+    public Set<ProductData> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductData> products) {
+    public void setProducts(Set<ProductData> products) {
         this.products = products;
     }
 }

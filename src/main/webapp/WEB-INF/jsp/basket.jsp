@@ -14,7 +14,11 @@
     <custom:header/>
 
     <c:forEach items="${products}" var="product">
-        <c:out value="${product.name}" />
+        <c:out value="${product.quantity}  "/>
+        <a href="<c:url value="/product?productUrl=${product.productLink}"/>">
+            <c:out value="${product.name}" />
+        </a>
+        </br>
     </c:forEach>
 
 </body>

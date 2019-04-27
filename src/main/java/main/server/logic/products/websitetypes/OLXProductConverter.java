@@ -8,7 +8,7 @@ public class OLXProductConverter implements ProductConverter {
 
     @Override
     public Product getProductFromSite(String url) {
-        //TODO
+        //TODO get Product from URL
         return new CarProduct("00000000",2001,300000);
     }
 }

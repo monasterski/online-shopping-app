@@ -7,7 +7,7 @@ public class OtomotoProductConverter implements ProductConverter {
 
     @Override
     public Product getProductFromSite(String url) {
-        //TODO
+        //TODO get Product from URL
         return null;
     }
 }

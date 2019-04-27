@@ -8,7 +8,7 @@ public class AllegroProductConverter implements ProductConverter {
 
     @Override
     public Product getProductFromSite(String url) {
-        //TODO GET PRODUCT FROM ALLEGRO
+        //TODO GET PRODUCT FROM  ALLEGRO
         return null;
     }
 }

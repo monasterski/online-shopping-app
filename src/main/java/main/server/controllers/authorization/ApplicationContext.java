@@ -1,24 +1,29 @@
 package main.server.controllers.authorization;
 
 import main.server.controllers.data.Basket;
-import main.server.database.dao.ProductDAO;
+import main.server.database.dao.ProductRepository;
+import main.server.database.dto.UserData;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ApplicationContext {
 
-    private String username;
+    @Autowired
+    private ProductRepository productRepository;
+
+    private UserData user;
 
     private Basket basket;
 
     public ApplicationContext(){}
 
-    public String getUsername() {
-        return username;
+    public UserData getUser() {
+        return user;
     }
 
-    void initContext(String username){
-        this.username = username;
+    void initContext(UserData user){
+        this.user = user;
         basket = new Basket();
-        basket.setProducts(ProductDAO.getInstance().getProducts(username));
+        basket.setProducts(productRepository.getProducts(user.getUsername()));
     }
 
     public Basket getBasket() {

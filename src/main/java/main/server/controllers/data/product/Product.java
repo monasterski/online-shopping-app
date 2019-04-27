@@ -12,6 +12,8 @@ public abstract class Product {
     private int quantity;
     private boolean used;
     private int contactNumber;
+    //Czy jest produkt na sprzedaż
+    private boolean active;
 
     private static HashMap<Class<? extends Product>,List<String>> additionalFieldsMap = new HashMap<>();
     private List<String> additionalFields;
@@ -83,5 +85,13 @@ public abstract class Product {
 
     public List<String> getAdditionalFields() {
         return additionalFields;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

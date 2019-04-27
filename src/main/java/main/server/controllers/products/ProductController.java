@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,6 +33,7 @@ public class ProductController extends AbstractController {
             Model model
     ) throws IOException {
         model.addAttribute("product",shopService.getProductDetails(productUrl));
+        model.addAttribute("productLink",productUrl);
         return "product";
     }
 

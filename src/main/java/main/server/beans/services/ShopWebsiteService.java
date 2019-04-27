@@ -12,4 +12,5 @@ public interface ShopWebsiteService {
     List<ProductController.ProductResultList> getProducts(String searchCriteria) throws IOException;
 
     Product getProductDetails(String url) throws IOException;
+
 }

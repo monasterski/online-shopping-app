@@ -3,8 +3,8 @@ package main.server.controllers.authorization;
 import main.server.beans.services.AuthorizationService;
 import main.server.controllers.AbstractController;
 import main.server.controllers.IgnoreAdvice;
-import main.server.controllers.data.Search;
 import main.server.controllers.data.User;
+import main.server.database.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @IgnoreAdvice
 @Controller
 public class AuthorizationController extends AbstractController {
 
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private AuthorizationService authorizationService;
     @Autowired
@@ -54,7 +55,7 @@ public class AuthorizationController extends AbstractController {
     ){
         String token = authorizationService.getUser(username).getPassword();
         if(token.equals(accessToken)) {
-            getApplicationContext().initContext(username);
+            getApplicationContext().initContext(userRepository.getItem(username));
             return "redirect:" + redirect;
         }
         throw new IllegalArgumentException("Access token is not valid");

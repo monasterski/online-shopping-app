@@ -23,6 +23,9 @@
         <s:eval expression="product.${add}" var="prd" />
         <c:out value="${prd}"/></br>
     </c:forEach>
+    <a href="<c:url value="/user/basket/add?name=${product.name}&productLink=${productLink}&returnUrl=${requestScope['javax.servlet.forward.request_uri']}" />">
+        <button class="btn btn-outline-success my-2 my-sm-0">Dodaj do koszyka</button>
+    </a>
 
 
 </body>
