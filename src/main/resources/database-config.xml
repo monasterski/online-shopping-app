@@ -17,7 +17,7 @@
             <props>
                 <!-- hibernate mapping to data definition lang -->
                 <prop key="hibernate.dialect">org.hibernate.dialect.SQLiteDialect</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <!--<prop key="hibernate.hbm2ddl.auto">create</prop>-->
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
             </props>

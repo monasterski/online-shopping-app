@@ -29,6 +29,6 @@ public class AuthorizationServiceBean implements AuthorizationService {
 
     @Override
     public boolean isUserRegistered(String username) {
-        return getUser(username) == null;
+        return getUser(username) != null;
     }
 }

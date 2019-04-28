@@ -5,6 +5,7 @@ import main.server.database.AbstractRepository;
 import main.server.database.dto.UserData;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
@@ -20,13 +21,5 @@ public class UserRepository extends AbstractRepository<UserData> {
     public UserData getItem(String username){
         return (UserData) getSession().createQuery("from UserData where username = :username")
                 .setParameter("username",username).uniqueResult();
-    }
-
-    //ONLY FOR DEVELOPER ISSUES
-    protected void initData() {
-        UserData user = new UserData();
-        user.setUsername("admin");
-        user.setPassword(passwordEncoder.encode("admin"));
-        createItem(user);
     }
 }

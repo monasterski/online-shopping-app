@@ -42,6 +42,8 @@ public class AuthorizationController extends AbstractController {
 
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public String postRegister(User user){
+        if(authorizationService.isUserRegistered(user.getUsername()))
+            return "redirect:/register";
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         authorizationService.registerUser(user);
         return "redirect:/login";

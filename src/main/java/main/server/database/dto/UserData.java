@@ -13,7 +13,7 @@ public class UserData extends AbstractData {
     @Id
     @Column(name = "USER_ID")
     private Long id;
-    @Column(name = "USER_NAME")
+    @Column(name = "USER_NAME"/*,unique = true*/)
     private String username;
     @Column(name = "USER_PASSWORD")
     private String password;

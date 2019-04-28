@@ -4,6 +4,7 @@ import main.server.controllers.data.Basket;
 import main.server.database.dao.ProductRepository;
 import main.server.database.dto.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 public class ApplicationContext {
 

@@ -4,8 +4,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
+import java.io.*;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,7 +17,6 @@ public abstract class AbstractRepository<DATA> {
     @Autowired
     private SessionFactory sessionFactory;
     private Class<DATA> data;
-    protected abstract void initData();
 
     protected AbstractRepository(Class<DATA> data){
         this.data = data;
@@ -52,5 +54,31 @@ public abstract class AbstractRepository<DATA> {
         Session session = sessionFactory.getCurrentSession();
         session.update(data);
         return data;
+    }
+
+    //TODO Becouse @GeneratedValue is not supported
+    private static Long id = null;
+    private static File file = null;
+    public static Long getId(){
+        id += 1;
+        try {
+            PrintWriter  writer = new PrintWriter(file);
+            writer.write(String.valueOf(id));
+            writer.close();
+        }catch (Exception e){ e.printStackTrace(); }
+        return id;
+    }
+    @Autowired
+    private ApplicationContext applicationContext;
+    @PostConstruct
+    private void init(){
+        if(id == null) {
+            try {
+                file = new File(applicationContext.getResource("classpath:sequence").getFile().getAbsolutePath());
+                FileReader reader = new FileReader(file);
+                BufferedReader br = new BufferedReader(reader);
+                id =  Long.parseLong(br.readLine());
+            } catch (Exception e) { e.printStackTrace(); }
+        }
     }
 }
