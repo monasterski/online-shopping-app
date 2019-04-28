@@ -30,7 +30,8 @@
 
 
         <div style="padding-right: 1%" class="form-inline my-2 my-lg-0">
-            <sf:form method="POST" class="form-inline" modelAttribute="search" action="/search">
+            <c:url value="/search" var="link"/>
+            <sf:form method="POST" class="form-inline" modelAttribute="search" action="${link}">
                 <sf:input path="searchString" type="text" class="form-control" placeholder="Search term"/>
                 <input id="button" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:5%" value="Szukaj" type="submit"/>
             </sf:form>

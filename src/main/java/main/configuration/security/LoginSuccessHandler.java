@@ -36,6 +36,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
             DefaultSavedRequest savedRequest = ((DefaultSavedRequest)((RequestCache) field.get(handler))
                     .getRequest(request,httpServletResponse));
             String redirect = savedRequest == null ? "/" : savedRequest.getRequestURI();
+            if(redirect.startsWith("/tai-app"))
+                redirect = redirect.substring(8);
             String url = redirectPath + "/user/initContext?redirect=" + redirect
                     + "&username=" + request.getParameter("username")
                     + "&token=" + encoder.encode(request.getParameter("password"));

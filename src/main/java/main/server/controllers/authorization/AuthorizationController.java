@@ -46,7 +46,7 @@ public class AuthorizationController extends AbstractController {
             return "redirect:/register";
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         authorizationService.registerUser(user);
-        return "redirect:/login";
+        return redirect("/login");
     }
 
     @RequestMapping(value = "/user/initContext",method = RequestMethod.GET)
@@ -58,7 +58,7 @@ public class AuthorizationController extends AbstractController {
         String token = authorizationService.getUser(username).getPassword();
         if(token.equals(accessToken)) {
             getApplicationContext().initContext(userRepository.getItem(username));
-            return "redirect:" + redirect;
+            return redirect(redirect);
         }
         throw new IllegalArgumentException("Access token is not valid");
     }

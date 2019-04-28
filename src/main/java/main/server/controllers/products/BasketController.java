@@ -30,6 +30,6 @@ public class BasketController extends AbstractController {
     ){
         getApplicationContext().getBasket().addProduct(productRepository.createItem(
                 getApplicationContext().getUser().getId(),name,productLink));
-        return "redirect:"+returnUrl+"?productUrl="+productLink;
+        return redirect(returnUrl+"?productUrl="+productLink);
     }
 }
