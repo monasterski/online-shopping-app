@@ -11,6 +11,6 @@ public @interface IgnoreAdvice {
 
     /*
         Around Methods or all Classes methods with this annotations
-            advice from ControllerAdvice is not invoked
+            advice from Advices are not invoked
      */
 }

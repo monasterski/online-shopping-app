@@ -1,6 +1,8 @@
 package main.server.database;
 
-public abstract class AbstractData {
+import java.io.Serializable;
+
+public abstract class AbstractData implements Serializable {
 
     public abstract Long getId();
     public abstract void setId(Long id);

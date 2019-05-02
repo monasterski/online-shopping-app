@@ -3,7 +3,6 @@ package main.server.database.dto;
 import main.server.database.AbstractData;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
