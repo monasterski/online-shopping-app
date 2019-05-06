@@ -56,7 +56,6 @@ public abstract class AbstractRepository<DATA> {
         return data;
     }
 
-    //TODO Becouse @GeneratedValue is not supported
     private static Long id = null;
     private static File file = null;
     public static Long getId(){
