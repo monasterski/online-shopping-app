@@ -3,6 +3,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="custom" uri="/WEB-INF/custom.tld"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,40 +28,44 @@
     <form>
         <div class="form-group">
             <label for="searchTerm">Wyszukaj ogłoszeń</label>
-            <input type="email" class="form-control" id="searchTerm" >
+            <input class="form-control" id="searchTerm" >
         </div>
         <b>Wybierz kategorię wyszukiwanego produktu</b>
         <div class="dropdown">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                Dropdown button
+                Kategoria
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Link 1</a>
-                <a class="dropdown-item" href="#">Link 2</a>
-                <a class="dropdown-item" href="#">Link 3</a>
+                <c:forEach items="${productCategoryList}" var="productCategory">
+                    <a class="dropdown-item" href="#">${productCategory}</a>
+                </c:forEach>
             </div>
         </div>
 
+        <script>
+            $(".dropdown-item").click(function(){
+
+                $(this).parents(".dropdown").find('.btn').text($(this).text());
+                $(this).parents(".dropdown").find('.btn').val($(this).text());
+
+            });
+        </script>
+
         <b>Wybierz strony do przeszukania:</b>
         <style>
-            .checkbox1, .checkbox2, .checkbox3 {
+            .checkboxElem {
                 transform: scale(2);
                 -webkit-transform: scale(2);
             }
         </style>
+
         <div class="form-group">
-            <div class="checkbox">
-                <input type="checkbox" class="checkbox1" id="OLX" />
-                <label class="checkbox-label">OLX</label>
-            </div>
-            <div class="checkbox">
-                <input type="checkbox" class="checkbox2" id="Otomoto" />
-                <label class="checkbox-label">Otomoto</label>
-            </div>
-            <div class="checkbox">
-                <input type="checkbox" class="checkbox3" id="Allegro" />
-                <label class="checkbox-label">Allegro</label>
-            </div>
+            <c:forEach items="${websiteTypeList}" var="websiteType">
+                <div class="checkbox">
+                    <input type="checkbox" class="checkboxElem" id=${websiteType} />
+                    <label class="checkbox-label">${websiteType}</label>
+                </div>
+            </c:forEach>
         </div>
 
         <button type="submit" class="btn btn-primary">Szukaj</button>
