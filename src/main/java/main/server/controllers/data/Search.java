@@ -1,6 +1,7 @@
 package main.server.controllers.data;
 
 public class Search {
+
     private String searchString;
 
     public String getSearchString() {

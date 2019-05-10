@@ -37,7 +37,7 @@
             </sf:form>
         </div>
           <div style="padding-right: 5%" class="form-inline my-2 my-lg-0">
-              <a href="<c:url value="/advanced_search" />">
+              <a href="<c:url value="/advanced_search_form" />">
                   <button class="btn btn-outline-success my-2 my-sm-0">Wyszukiwanie zaawansowane</button>
               </a>
           </div>

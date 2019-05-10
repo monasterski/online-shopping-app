@@ -2,6 +2,7 @@ package main.server.controllers.search;
 
 import main.server.beans.services.ShopWebsiteService;
 import main.server.controllers.AbstractController;
+import main.server.controllers.data.AdvancedSearch;
 import main.server.controllers.data.Search;
 import main.server.controllers.data.product.ProductCategory;
 import main.server.logic.products.WebsiteType;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,8 +24,11 @@ public class AdvancedSearchController extends AbstractController {
     @Autowired
     private ShopWebsiteService shopService;
 
-    @RequestMapping(value = "/advanced_search", method = RequestMethod.GET)
-    public String search(Search search, Model model) throws IOException {
+    @RequestMapping(value = "/advanced_search_form", method = RequestMethod.GET)
+    public String searchForm(AdvancedSearch advancedSearch, Model model) throws IOException {
+
+        model.addAttribute("advancedSearch", new AdvancedSearch());
+
         List<String> productCategoryList = new ArrayList<>();
         for(ProductCategory productCategory : ProductCategory.values()){
             String productCategoryName = productCategory.name().toLowerCase();
@@ -39,6 +44,27 @@ public class AdvancedSearchController extends AbstractController {
         }
         model.addAttribute("websiteTypeList", websiteTypeList);
         return "advanced_search";
+    }
+
+    @RequestMapping(value = "/advanced_search_results", method = RequestMethod.POST)
+    public String advancedSearch(
+            @RequestParam(value ="Allegro", required = false)String[] checkboxAllegroVal,
+            @RequestParam(value="Olx", required = false)String[] checkboxOLXVal,
+            @RequestParam(value="Otomoto", required = false)String[] checkboxOtomotoVal,
+            AdvancedSearch advancedSearch,
+            Model model){
+
+        if(checkboxAllegroVal != null){
+            advancedSearch.setWebsitesToSechIn("Allegro");
+        }
+        if(checkboxOLXVal != null){
+            advancedSearch.setWebsitesToSechIn("Olx");
+        }
+        if(checkboxOtomotoVal != null){
+            advancedSearch.setWebsitesToSechIn("Otomoto");
+        }
+        model.addAttribute("advancedSearch", advancedSearch);
+        return "advanced_search_results";
     }
 
 }

@@ -12,6 +12,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
+
 </head>
 <body>
 <custom:header/>
@@ -25,28 +29,29 @@
             <li>Sortuj wyniki</li>
         </ul>
     </div>
-    <form>
+    <c:url value="/advanced_search_results" var="link"/>
+    <sf:form method="POST" modelAttribute="advancedSearch" action="${link}">
         <div class="form-group">
             <label for="searchTerm">Wyszukaj ogłoszeń</label>
-            <input class="form-control" id="searchTerm" >
+            <sf:input path="searchString" type="text" class="form-control" id="searchTerm"/>
         </div>
         <b>Wybierz kategorię wyszukiwanego produktu</b>
         <div class="dropdown">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                Kategoria
-            </button>
-            <div class="dropdown-menu">
-                <c:forEach items="${productCategoryList}" var="productCategory">
-                    <a class="dropdown-item" href="#">${productCategory}</a>
-                </c:forEach>
-            </div>
+            <sf:select name="categoryButton" path="productCategory" type="button" class="selectpicker" data-toggle="dropdown">
+                <div class="dropdown-menu">
+                    <c:forEach items="${productCategoryList}" var="productCategory">
+                        <sf:option class="dropdown-item" href="#" value="${productCategory}"/>
+                    </c:forEach>
+                </div>
+            </sf:select>
+
         </div>
 
         <script>
             $(".dropdown-item").click(function(){
 
                 $(this).parents(".dropdown").find('.btn').text($(this).text());
-                $(this).parents(".dropdown").find('.btn').val($(this).text());
+                $(this).parents(".dropdown").find('.btn').value($(this).text());
 
             });
         </script>
@@ -62,14 +67,14 @@
         <div class="form-group">
             <c:forEach items="${websiteTypeList}" var="websiteType">
                 <div class="checkbox">
-                    <input type="checkbox" class="checkboxElem" id=${websiteType} />
+                    <input type="checkbox" name="${websiteType}" class="checkboxElem" id=${websiteType} />
                     <label class="checkbox-label">${websiteType}</label>
                 </div>
             </c:forEach>
         </div>
 
         <button type="submit" class="btn btn-primary">Szukaj</button>
-    </form>
+    </sf:form>
 
 </div>
 </html>
