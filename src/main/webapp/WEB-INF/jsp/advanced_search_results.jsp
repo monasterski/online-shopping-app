@@ -21,11 +21,16 @@
         <ul>
             <li>Fraza wyszukiwania :  <c:out value="${advancedSearch.searchString}"/></li>
             <li>Strony do przeszukania:</li>
-            <c:forEach var="website" items="${advancedSearch.websitesToSechIn}">
+            <c:forEach var="website" items="${advancedSearch.websitesToSearchIn}">
                 <li><c:out value="${website.name()}" /></li>
             </c:forEach>
             <li>Kategoria: <c:out value="${advancedSearch.productCategory.name()}"/></li>
         </ul>
+
+        <c:forEach var="product" items="${advancedResultsList}">
+            <li><c:out value="${product.name}"/></li>
+        </c:forEach>
+
     </div>
 
 </div>

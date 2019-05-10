@@ -12,9 +12,9 @@ public class CarProduct extends Product {
 
     public CarProduct(){}
 
-    public CarProduct(String vin,int year,int mileage){
+    public CarProduct(String name, String price, String contactNumber, String vin,int year,int mileage){
         //TODO REMOVE only for testing
-        super("Auto",23000,123456789);
+        super(name,Integer.parseInt(price),Integer.parseInt(contactNumber));
         this.vin = vin;
         this.year = year;
         this.mileage = mileage;

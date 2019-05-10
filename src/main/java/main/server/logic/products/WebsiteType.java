@@ -1,5 +1,7 @@
 package main.server.logic.products;
 
+import main.server.controllers.data.AdvancedSearch;
+import main.server.controllers.data.product.CarProduct;
 import main.server.controllers.data.product.Product;
 import main.server.logic.products.websitetypes.AllegroProductConverter;
 import main.server.logic.products.websitetypes.OLXProductConverter;
@@ -7,15 +9,10 @@ import main.server.logic.products.websitetypes.OtomotoProductConverter;
 
 public enum WebsiteType {
 
-    OLX(new OLXProductConverter()),
-    OTOMOTO(new OtomotoProductConverter()),
-    ALLEGRO(new AllegroProductConverter());
+    OLX,
+    OTOMOTO,
+    ALLEGRO;
 
-    private ProductConverter converter;
-
-    WebsiteType(ProductConverter converter){
-        this.converter = converter;
-    }
 
     public static Product getProductDetails(String url) {
         for(WebsiteType type : WebsiteType.values())
@@ -25,6 +22,7 @@ public enum WebsiteType {
     }
 
     public Product getProduct(String url) {
-        return converter.getProductFromSite(url);
+        //TODO
+        return new CarProduct("wymyslona nazwa rezultatu", "1000", "1234","00000000",2001,300000);
     }
 }

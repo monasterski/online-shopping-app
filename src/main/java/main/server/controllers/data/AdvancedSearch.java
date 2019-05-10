@@ -10,25 +10,25 @@ public class AdvancedSearch extends Search{
 
     private ProductCategory productCategory;
 
-    private Set<WebsiteType> websitesToSechIn;
+    private Set<WebsiteType> websitesToSearchIn;
 
     public ProductCategory getProductCategory() {
         return productCategory;
     }
 
     public AdvancedSearch(){
-        this.websitesToSechIn = new HashSet<>();
+        this.websitesToSearchIn = new HashSet<>();
     }
 
     public void setProductCategory(String productCategory) {
         this.productCategory = ProductCategory.valueOf(productCategory.toUpperCase());
     }
 
-    public Set<WebsiteType> getWebsitesToSechIn() {
-        return websitesToSechIn;
+    public Set<WebsiteType> getWebsitesToSearchIn() {
+        return websitesToSearchIn;
     }
 
-    public void setWebsitesToSechIn(String websiteToSechIn) {
-        this.websitesToSechIn.add(WebsiteType.valueOf(websiteToSechIn.toUpperCase()));
+    public void setWebsitesToSearchIn(String websiteToSearchIn) {
+        this.websitesToSearchIn.add(WebsiteType.valueOf(websiteToSearchIn.toUpperCase()));
     }
 }

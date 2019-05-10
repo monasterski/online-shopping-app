@@ -3,7 +3,6 @@ package main.server.controllers.search;
 import main.server.beans.services.ShopWebsiteService;
 import main.server.controllers.AbstractController;
 import main.server.controllers.data.AdvancedSearch;
-import main.server.controllers.data.Search;
 import main.server.controllers.data.product.ProductCategory;
 import main.server.logic.products.WebsiteType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -55,15 +53,16 @@ public class AdvancedSearchController extends AbstractController {
             Model model){
 
         if(checkboxAllegroVal != null){
-            advancedSearch.setWebsitesToSechIn("Allegro");
+            advancedSearch.setWebsitesToSearchIn("Allegro");
         }
         if(checkboxOLXVal != null){
-            advancedSearch.setWebsitesToSechIn("Olx");
+            advancedSearch.setWebsitesToSearchIn("Olx");
         }
         if(checkboxOtomotoVal != null){
-            advancedSearch.setWebsitesToSechIn("Otomoto");
+            advancedSearch.setWebsitesToSearchIn("Otomoto");
         }
         model.addAttribute("advancedSearch", advancedSearch);
+        model.addAttribute("advancedResultsList", shopService.getAdvancedProductList(advancedSearch));
         return "advanced_search_results";
     }
 

@@ -13,4 +13,8 @@ public enum ProductCategory {
     ProductCategory(AbstractProductFactory productFactory){
         this.productFactory = productFactory;
     }
+
+    public AbstractProductFactory getProductFactory(){
+        return this.productFactory;
+    }
 }
