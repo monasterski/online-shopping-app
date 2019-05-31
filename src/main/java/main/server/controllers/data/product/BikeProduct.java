@@ -11,7 +11,7 @@ public class BikeProduct extends Product{
 
     public BikeProduct(Double weight, Double sizeOfWheel){
         //TODO REMOVE only for testing
-        super("Bike",1200,123456789);
+//        super("Bike",1200,123456789);
         this.weight = weight;
         this.sizeOfWheel = sizeOfWheel;
     }

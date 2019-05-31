@@ -2,6 +2,7 @@ package main.server.controllers;
 
 import main.server.beans.services.ShopWebsiteService;
 import main.server.controllers.data.Search;
+import main.server.controllers.data.product.ProductCategory;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 @Aspect
 @Component

@@ -7,6 +7,11 @@ import main.server.logic.products.websitetypes.AllegroProductConverter;
 import main.server.logic.products.websitetypes.OLXProductConverter;
 import main.server.logic.products.websitetypes.OtomotoProductConverter;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+
 public enum WebsiteType {
 
     OLX,
@@ -23,6 +28,14 @@ public enum WebsiteType {
 
     public Product getProduct(String url) {
         //TODO
-        return new CarProduct("wymyslona nazwa rezultatu", "1000", "1234","00000000",2001,300000);
+        try {
+
+            BufferedImage image = ImageIO.read(new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png"));
+            return new CarProduct("wymyslona nazwa rezultatu", OLX, image, "1000","1234",2001,300000);
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

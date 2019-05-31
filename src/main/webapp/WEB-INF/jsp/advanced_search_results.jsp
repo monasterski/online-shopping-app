@@ -1,6 +1,8 @@
+<%@ page import="java.awt.image.BufferedImage" %>
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="custom" uri="/WEB-INF/custom.tld"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -17,19 +19,37 @@
 <custom:header/>
 <div style="max-width:40%; margin-left: auto; margin-right: auto;">
     <div class="container">
-        <h2>Wyszukiwanie zaawansowane - wykonane</h2>
-        <ul>
-            <li>Fraza wyszukiwania :  <c:out value="${advancedSearch.searchString}"/></li>
-            <li>Strony do przeszukania:</li>
-            <c:forEach var="website" items="${advancedSearch.websitesToSearchIn}">
-                <li><c:out value="${website.name()}" /></li>
-            </c:forEach>
-            <li>Kategoria: <c:out value="${advancedSearch.productCategory.name()}"/></li>
-        </ul>
+        <h2>Wyszukiwanie zaawansowane</h2>
 
-        <c:forEach var="product" items="${advancedResultsList}">
-            <li><c:out value="${product.name}"/></li>
+
+        <table class="table table-borderless">
+        <c:forEach var="product" items="${advancedResultsList}" varStatus="products">
+
+            <thead>
+            <tr>
+                <th scope="col" rowspan="3"><img src="data:image/jpg;base64, ${product.image64}"  />
+                <td colspan="5"><b><c:out value="${product.name}"/></b></td>
+                <tr>
+                    <td scope="row">Cena: <c:out value="${product.price}"/></td>
+                    <td>Oferta z: <c:out value="${product.sourceWebsite}"/></td>
+                    <td>Używany: <c:out value="${product.used}"/></td>
+
+                <tr>
+                <td scope="row">Numer kontaktowy: <c:out value="${product.contactNumber}"/></td>
+                <c:forEach var="poleDodatkowe" items="${product.additionalFields}" varStatus="fields">
+
+                    <s:eval expression="product.${poleDodatkowe}" var="prd" />
+                    <td>${product.getAdditionalFieldInPolish(poleDodatkowe)}: <c:out value="${prd}"/></td>
+
+                </c:forEach>
+                </tr>
+            </tr>
+
+            </thead>
+
+
         </c:forEach>
+        </table>
 
     </div>
 

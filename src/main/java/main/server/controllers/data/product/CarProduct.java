@@ -1,10 +1,13 @@
 package main.server.controllers.data.product;
 
 
+import main.server.logic.products.WebsiteType;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 public class CarProduct extends Product {
 
-    @Additional
-    private String vin;
     @Additional
     private int year;
     @Additional
@@ -12,21 +15,13 @@ public class CarProduct extends Product {
 
     public CarProduct(){}
 
-    public CarProduct(String name, String price, String contactNumber, String vin,int year,int mileage){
+    public CarProduct(String name, WebsiteType sourceWebsite, BufferedImage image, String price, String contactNumber, int year, int mileage){
         //TODO REMOVE only for testing
-        super(name,Integer.parseInt(price),Integer.parseInt(contactNumber));
-        this.vin = vin;
+        super(name, image, Integer.parseInt(price),Integer.parseInt(contactNumber), sourceWebsite);
         this.year = year;
         this.mileage = mileage;
     }
 
-    public String getVin() {
-        return vin;
-    }
-
-    public void setVin(String vin) {
-        this.vin = vin;
-    }
 
     public int getMileage() {
         return mileage;
