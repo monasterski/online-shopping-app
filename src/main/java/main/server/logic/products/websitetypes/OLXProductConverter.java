@@ -36,8 +36,8 @@ public class OLXProductConverter implements ProductConverter {
                     resultsList.addAll(getVehicleProductsFromSite());
                     break;
 
-                case BIKE:
-                    resultsList.addAll(getBikeProductsFromSite());
+                case CLOTHING:
+                    resultsList.addAll(getClothingProductsFromSite());
                     break;
 
                 default:
@@ -145,7 +145,7 @@ public class OLXProductConverter implements ProductConverter {
 
     }
 
-    private List<Product> getBikeProductsFromSite() {
+    private List<Product> getClothingProductsFromSite() {
         return new ArrayList<>();
     }
 }

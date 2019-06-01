@@ -38,8 +38,8 @@ public class GratkaProductConverter implements ProductConverter {
                     resultsList.addAll(getVehicleProductsFromGratka());
                     break;
 
-                case BIKE:
-                    resultsList.addAll(getBikeProductsFromGratka());
+                case CLOTHING:
+                    resultsList.addAll(getClothingProductsFromGratka());
                     break;
 
                 default:
@@ -104,7 +104,7 @@ public class GratkaProductConverter implements ProductConverter {
         return resultsList;
     }
 
-    private List<Product> getBikeProductsFromGratka() {
+    private List<Product> getClothingProductsFromGratka() {
         return new ArrayList<>();
     }
 }

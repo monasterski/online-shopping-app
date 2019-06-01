@@ -1,12 +1,12 @@
 package main.server.controllers.data.product;
 
 import main.server.logic.products.AbstractProductFactory;
-import main.server.logic.products.producttypes.BikeProductFactory;
+import main.server.logic.products.producttypes.ClothingProductFactory;
 import main.server.logic.products.producttypes.VehicleProductFactory;
 
 public enum ProductCategory {
     VEHICLE(new VehicleProductFactory()),
-    BIKE(new BikeProductFactory());
+    CLOTHING(new ClothingProductFactory());
 
     private AbstractProductFactory productFactory;
 
