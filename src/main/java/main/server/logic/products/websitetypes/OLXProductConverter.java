@@ -1,14 +1,11 @@
 package main.server.logic.products.websitetypes;
 
 import main.server.controllers.data.AdvancedSearch;
-import main.server.controllers.data.product.CarProduct;
 import main.server.controllers.data.product.Product;
 import main.server.controllers.data.product.ProductCategory;
-import main.server.controllers.products.ProductController;
 import main.server.logic.products.AbstractProductFactory;
 import main.server.logic.products.ProductConverter;
-import main.server.logic.products.WebsiteType;
-import main.server.logic.products.producttypes.CarProductFactory;
+import main.server.logic.products.producttypes.VehicleProductFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -35,8 +32,8 @@ public class OLXProductConverter implements ProductConverter {
         List<Product> resultsList = new ArrayList<>();
         try {
             switch(category) {
-                case CAR:
-                    resultsList.addAll(getCarProductsFromSite());
+                case VEHICLE:
+                    resultsList.addAll(getVehicleProductsFromSite());
                     break;
 
                 case BIKE:
@@ -53,7 +50,7 @@ public class OLXProductConverter implements ProductConverter {
         return resultsList;
     }
 
-    private List<Product> getCarProductsFromSite() throws IOException {
+    private List<Product> getVehicleProductsFromSite() throws IOException {
         //Parameters needed:
         //name;
         //sourceWebsite
@@ -66,7 +63,7 @@ public class OLXProductConverter implements ProductConverter {
         //year;
         //mileage;
         String seachTerm = advancedSearch.getSearchString();
-        AbstractProductFactory productFactory = new CarProductFactory();
+        AbstractProductFactory productFactory = new VehicleProductFactory();
 
         Document doc = Jsoup.connect("https://www.olx.pl/oferty/q-"+seachTerm).get();
         Elements table = doc.select("tr.wrap");
@@ -82,14 +79,14 @@ public class OLXProductConverter implements ProductConverter {
             if(attributes.get("image").equals(""))
                 attributes.put("image", "https://static.thenounproject.com/png/1427-200.png");
             //<--- link --->
-            Document oneCarDoc = Jsoup.connect(el.select("a.marginright5").attr("href")).get();
-            attributes.put("link", oneCarDoc.location());
+            Document oneVehicleDoc = Jsoup.connect(el.select("a.marginright5").attr("href")).get();
+            attributes.put("link", oneVehicleDoc.location());
             //<--- --->
-            String host = new URL(oneCarDoc.location()).getHost();
+            String host = new URL(oneVehicleDoc.location()).getHost();
             switch (host){
                 case "www.otomoto.pl":
                     //<--- year --->
-                    Elements elemOtomoto = oneCarDoc
+                    Elements elemOtomoto = oneVehicleDoc
                             .select("#parameters")
                             .select("li.offer-params__item:has(span.offer-params__label:contains(Rok produkcji))")
                             .select("div.offer-params__value");
@@ -97,7 +94,7 @@ public class OLXProductConverter implements ProductConverter {
                         continue;
                     attributes.put("year", elemOtomoto.text());
                     //<--- mileage --->
-                    elemOtomoto = oneCarDoc
+                    elemOtomoto = oneVehicleDoc
                             .select("#parameters")
                             .select("li.offer-params__item:has(span.offer-params__label:contains(Przebieg))")
                             .select("div.offer-params__value");
@@ -105,7 +102,7 @@ public class OLXProductConverter implements ProductConverter {
                         continue;
                     attributes.put("mileage", elemOtomoto.text());
                     //<--- price --->
-                    elemOtomoto = oneCarDoc
+                    elemOtomoto = oneVehicleDoc
                             .select(".offer-price__number");
                     attributes.put("price", elemOtomoto.text());
                     break;
@@ -113,7 +110,7 @@ public class OLXProductConverter implements ProductConverter {
                     Elements elemOlx;
                     try {
                         //<--- year --->
-                        elemOlx = oneCarDoc
+                        elemOlx = oneVehicleDoc
                                 .select(".details td.col")
                                 .select("tr:matches(Rok produkcji)").first()
                                 .select("td.value").select("strong");
@@ -121,7 +118,7 @@ public class OLXProductConverter implements ProductConverter {
                             continue;
                         attributes.put("year", elemOlx.text());
                         //<--- mileage --->
-                        elemOlx = oneCarDoc
+                        elemOlx = oneVehicleDoc
                                 .select(".details td.col")
                                 .select("tr:matches(Przebieg)").first()
                                 .select("td.value").select("strong");
@@ -130,11 +127,11 @@ public class OLXProductConverter implements ProductConverter {
                         attributes.put("mileage", elemOlx.text());
                     }
                     catch (NullPointerException ex) {
-                        //Product found is not a car
+                        //Product found is not a vehicle
                         continue;
                     }
                     //<--- price --->
-                    elemOlx = oneCarDoc
+                    elemOlx = oneVehicleDoc
                             .select(".price-label strong");
                     attributes.put("price", elemOlx.text());
                     break;

@@ -2,10 +2,10 @@ package main.server.controllers.data.product;
 
 import main.server.logic.products.AbstractProductFactory;
 import main.server.logic.products.producttypes.BikeProductFactory;
-import main.server.logic.products.producttypes.CarProductFactory;
+import main.server.logic.products.producttypes.VehicleProductFactory;
 
 public enum ProductCategory {
-    CAR(new CarProductFactory()),
+    VEHICLE(new VehicleProductFactory()),
     BIKE(new BikeProductFactory());
 
     private AbstractProductFactory productFactory;

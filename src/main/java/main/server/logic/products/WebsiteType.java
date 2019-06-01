@@ -1,6 +1,6 @@
 package main.server.logic.products;
 
-import main.server.controllers.data.product.CarProduct;
+import main.server.controllers.data.product.VehicleProduct;
 import main.server.controllers.data.product.Product;
 
 import javax.imageio.ImageIO;
@@ -27,7 +27,7 @@ public enum WebsiteType {
         try {
 
             BufferedImage image = ImageIO.read(new URL("https://static.thenounproject.com/png/1427-200.png"));
-            return new CarProduct("wymyslona nazwa rezultatu", OLX, image, true, "1000","1234",2001,300000);
+            return new VehicleProduct("wymyslona nazwa rezultatu", OLX, image, true, "1000","1234",2001,300000);
         }
         catch(IOException e) {
             e.printStackTrace();

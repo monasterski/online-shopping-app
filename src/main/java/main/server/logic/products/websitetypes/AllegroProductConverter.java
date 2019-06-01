@@ -1,7 +1,6 @@
 package main.server.logic.products.websitetypes;
 
 import main.server.controllers.data.AdvancedSearch;
-import main.server.controllers.data.product.CarProduct;
 import main.server.controllers.data.product.Product;
 import main.server.controllers.data.product.ProductCategory;
 import main.server.logic.products.AbstractProductFactory;

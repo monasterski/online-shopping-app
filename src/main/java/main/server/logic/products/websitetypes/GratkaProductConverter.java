@@ -5,7 +5,7 @@ import main.server.controllers.data.product.Product;
 import main.server.controllers.data.product.ProductCategory;
 import main.server.logic.products.AbstractProductFactory;
 import main.server.logic.products.ProductConverter;
-import main.server.logic.products.producttypes.CarProductFactory;
+import main.server.logic.products.producttypes.VehicleProductFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -34,8 +34,8 @@ public class GratkaProductConverter implements ProductConverter {
         List<Product> resultsList = new ArrayList<>();
         try {
             switch(category) {
-                case CAR:
-                    resultsList.addAll(getCarProductsFromGratka());
+                case VEHICLE:
+                    resultsList.addAll(getVehicleProductsFromGratka());
                     break;
 
                 case BIKE:
@@ -51,7 +51,7 @@ public class GratkaProductConverter implements ProductConverter {
         }
         return resultsList;
     }
-    private List<Product> getCarProductsFromGratka() throws IOException {
+    private List<Product> getVehicleProductsFromGratka() throws IOException {
         //Parameters needed:
         //name;
         //sourceWebsite
@@ -62,7 +62,7 @@ public class GratkaProductConverter implements ProductConverter {
         //year;
         //mileage;
         String seachTerm = advancedSearch.getSearchString();
-        AbstractProductFactory productFactory = new CarProductFactory();
+        AbstractProductFactory productFactory = new VehicleProductFactory();
 
         List<Product> resultsList = new ArrayList<>();
         Map<String, String> attributes = new HashMap<>();
@@ -86,9 +86,9 @@ public class GratkaProductConverter implements ProductConverter {
             //<--- offerLink --->
             String offerLink = offer.select("a.teaser__anchor").attr("href");
             attributes.put("link", offerLink);
-            Document oneCarDoc = Jsoup.connect(offerLink).get();
+            Document oneVehicleDoc = Jsoup.connect(offerLink).get();
             //<--- used --->
-            Elements specs = oneCarDoc.select(".parameters__container");
+            Elements specs = oneVehicleDoc.select(".parameters__container");
             if(specs.select("li:contains(Stan pojazdu)").select("b.parameters__value").html().equals("nowy"))
                 attributes.put("used", "no");
             else {
