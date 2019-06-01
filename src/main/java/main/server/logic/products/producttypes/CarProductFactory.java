@@ -37,20 +37,18 @@ public class CarProductFactory implements AbstractProductFactory {
     @Override
     public CarProduct createProduct(Map<String, String> data){
 
-//        attributes.put("name", el.select("a.marginright5").select("strong").html());
-//        attributes.put("image", el.select("img.fleft").attr("src"));
-//        attributes.put("price", oneCarDoc.select("span.offer-price__number").first().data());
-//        attributes.put("used", oneCarDoc.select("span.offer-params__link").first().attr("title"));
-
         CarProduct carProduct;
 
 
-//        CarProduct(String name, Image image, String price, String contactNumber, String vin, int year, int mileage)
+//        CarProduct(String name, WebsiteType sourceWebsite, BufferedImage image, boolean used, String price, String linkToOffer, int year, int mileage)
 
         try{
 
             BufferedImage image = ImageIO.read(new URL(data.get("image")));
-            return new CarProduct(data.get("name"), WebsiteType.valueOf(data.get("sourceWebsite")), image, "123", "1234", Integer.parseInt(data.get("year")), 1000);
+            String price = data.get("price").replaceAll("[^\\d.]+", "");
+            int mileage = Integer.parseInt(data.get("mileage").replaceAll("[^\\d.]+", ""));
+            return new CarProduct(data.get("name"), WebsiteType.valueOf(data.get("sourceWebsite")), image,
+                    true, price, data.get("link"), Integer.parseInt(data.get("year")), mileage);
         }
         catch (java.net.MalformedURLException exc){
             System.out.println(data.get("image"));

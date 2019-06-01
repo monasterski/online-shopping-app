@@ -32,10 +32,14 @@
                 <tr>
                     <td scope="row">Cena: <c:out value="${product.price}"/></td>
                     <td>Oferta z: <c:out value="${product.sourceWebsite}"/></td>
-                    <td>Używany: <c:out value="${product.used}"/></td>
+                    <td>Używany: <c:out value="${product.isUsed()}"/></td>
 
                 <tr>
-                <td scope="row">Numer kontaktowy: <c:out value="${product.contactNumber}"/></td>
+                <td scope="row">Link do oferty:
+                    <a href="<c:url value="${product.linkToOffer}"/>">
+                        <c:out value="link" />
+                    </a>
+                    </td>
                 <c:forEach var="poleDodatkowe" items="${product.additionalFields}" varStatus="fields">
 
                     <s:eval expression="product.${poleDodatkowe}" var="prd" />

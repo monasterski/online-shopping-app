@@ -15,9 +15,9 @@ public class CarProduct extends Product {
 
     public CarProduct(){}
 
-    public CarProduct(String name, WebsiteType sourceWebsite, BufferedImage image, String price, String contactNumber, int year, int mileage){
+    public CarProduct(String name, WebsiteType sourceWebsite, BufferedImage image, boolean used, String price, String linkToOffer, int year, int mileage){
         //TODO REMOVE only for testing
-        super(name, image, Integer.parseInt(price),Integer.parseInt(contactNumber), sourceWebsite);
+        super(name, image, Integer.parseInt(price), used, linkToOffer, sourceWebsite);
         this.year = year;
         this.mileage = mileage;
     }

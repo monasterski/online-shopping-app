@@ -19,7 +19,16 @@ public abstract class Product {
     private int price;
     private int quantity;
     private boolean used;
-    private int contactNumber;
+    private String linkToOffer;
+
+    public String getLinkToOffer() {
+        return linkToOffer;
+    }
+
+    public void setLinkToOffer(String linkToOffer) {
+        this.linkToOffer = linkToOffer;
+    }
+
     //Czy jest produkt na sprzedaż
     private boolean active;
     private WebsiteType sourceWebsite;
@@ -53,11 +62,12 @@ public abstract class Product {
     private static HashMap<Class<? extends Product>,List<String>> additionalFieldsMap = new HashMap<>();
     private List<String> additionalFields;
 
-    Product(String name, BufferedImage image, int price,int contactNumber, WebsiteType website){
+    Product(String name, BufferedImage image, int price, boolean used, String linkToOffer, WebsiteType website){
         this.name = name;
         this.image = image;
         this.price = price;
-        this.contactNumber = contactNumber;
+        this.used = used;
+        this.linkToOffer = linkToOffer;
         this.sourceWebsite = website;
         intiAdditionalFields();
     }
@@ -104,20 +114,15 @@ public abstract class Product {
         this.quantity = quantity;
     }
 
-    public boolean isUsed() {
-        return used;
+    public String isUsed() {
+
+        if(used)
+            return "tak";
+        return "nie";
     }
 
     public void setUsed(boolean used) {
         this.used = used;
-    }
-
-    public int getContactNumber() {
-        return contactNumber;
-    }
-
-    public void setContactNumber(int contactNumber) {
-        this.contactNumber = contactNumber;
     }
 
     public List<String> getAdditionalFields() {

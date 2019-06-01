@@ -54,7 +54,17 @@ public class OLXProductConverter implements ProductConverter {
     }
 
     private List<Product> getCarProductsFromSite() throws IOException {
-        List<Product> carResultList = new ArrayList<>();
+        //Parameters needed:
+        //name;
+        //sourceWebsite
+        //image
+        //price;
+        //used;
+        //contactNumber;
+        //active;
+        //vin;
+        //year;
+        //mileage;
         String seachTerm = advancedSearch.getSearchString();
         AbstractProductFactory productFactory = new CarProductFactory();
 
@@ -64,15 +74,22 @@ public class OLXProductConverter implements ProductConverter {
         for(Element el : table){
             Map<String, String> attributes = new HashMap<>();
             String name = el.html();
+            //<--- name --->
             attributes.put("name", el.select("a.marginright5").select("strong").html());
+            //<--- sourceWebsite --->
             attributes.put("sourceWebsite", "OLX");
+            //<--- image --->
             attributes.put("image", el.select("img.fleft").attr("src"));
             if(attributes.get("image").equals(""))
-                attributes.put("image", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png");
+                attributes.put("image", "https://static.thenounproject.com/png/1427-200.png");
+            //<--- link --->
             Document oneCarDoc = Jsoup.connect(el.select("a.marginright5").attr("href")).get();
+            attributes.put("link", oneCarDoc.location());
+            //<--- --->
             String host = new URL(oneCarDoc.location()).getHost();
-            switch (host) {
+            switch (host){
                 case "www.otomoto.pl":
+                    //<--- year --->
                     Elements elemOtomoto = oneCarDoc
                             .select("#parameters")
                             .select("li.offer-params__item:has(span.offer-params__label:contains(Rok produkcji))")
@@ -80,35 +97,51 @@ public class OLXProductConverter implements ProductConverter {
                     if(elemOtomoto.text().equals(""))
                         continue;
                     attributes.put("year", elemOtomoto.text());
+                    //<--- mileage --->
+                    elemOtomoto = oneCarDoc
+                            .select("#parameters")
+                            .select("li.offer-params__item:has(span.offer-params__label:contains(Przebieg))")
+                            .select("div.offer-params__value");
+                    if(elemOtomoto.text().equals(""))
+                        continue;
+                    attributes.put("mileage", elemOtomoto.text());
+                    //<--- price --->
+                    elemOtomoto = oneCarDoc
+                            .select(".offer-price__number");
+                    attributes.put("price", elemOtomoto.text());
                     break;
                 case "www.olx.pl":
+                    Elements elemOlx;
                     try {
-                        Elements elemOlx = oneCarDoc
+                        //<--- year --->
+                        elemOlx = oneCarDoc
                                 .select(".details td.col")
                                 .select("tr:matches(Rok produkcji)").first()
                                 .select("td.value").select("strong");
                         if(elemOlx.text().equals(""))
                             continue;
                         attributes.put("year", elemOlx.text());
+                        //<--- mileage --->
+                        elemOlx = oneCarDoc
+                                .select(".details td.col")
+                                .select("tr:matches(Przebieg)").first()
+                                .select("td.value").select("strong");
+                        if(elemOlx.text().equals(""))
+                            continue;
+                        attributes.put("mileage", elemOlx.text());
                     }
                     catch (NullPointerException ex) {
                         //Product found is not a car
                         continue;
                     }
-
+                    //<--- price --->
+                    elemOlx = oneCarDoc
+                            .select(".price-label strong");
+                    attributes.put("price", elemOlx.text());
                     break;
                 default:
                     break;
             }
-
-//            add("name");
-//            add("price");
-//            add("used");
-//            add("contactNumber");
-//            add("active");
-//            add("vin");
-//            add("year");
-//            add("mileage");
 
             resultsList.add(productFactory.createProduct(attributes));
         }
