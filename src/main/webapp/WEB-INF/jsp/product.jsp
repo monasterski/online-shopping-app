@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -12,21 +13,35 @@
 </head>
 <body>
     <custom:header/>
+    <div style="max-width:40%; margin-left: auto; margin-right: auto;">
+    <table class="table table-borderless">
+    <thead>
+    <tr>
+        <th scope="col" rowspan="3"><img src="data:image/jpg;base64, ${product.image64}"  />
+        <td colspan="5"><b><c:out value="${product.name}"/></b></td>
+    <tr>
+        <td scope="row">Cena: <c:out value="${product.price}"/></td>
+        <td>Oferta z: <c:out value="${product.sourceWebsite}"/></td>
+        <td>Używany: <c:out value="${product.used}"/></td>
 
-    <c:out value="${product.name}"/></br>
-    <c:out value="${product.price}"/></br>
-    <c:out value="${product.quantity}"/></br>
-    <c:out value="${product.used}"/></br>
-    <c:out value="${product.contactNumber}"/></br>
-    <c:forEach items="${product.additionalFields}" var="add">
-        <!-- DOUBLE EVAL ONCE S[] AND NEXT ALL EXPRESSION LIKE ALL IN S[] -->
-        <s:eval expression="product.${add}" var="prd" />
-        <c:out value="${prd}"/></br>
-    </c:forEach>
+    <tr>
+        <td scope="row">Numer kontaktowy: <c:out value="${product.contactNumber}"/></td>
+        <c:forEach var="poleDodatkowe" items="${product.additionalFields}" varStatus="fields">
+
+            <s:eval expression="product.${poleDodatkowe}" var="prd" />
+            <td>${product.getAdditionalFieldInPolish(poleDodatkowe)}: <c:out value="${prd}"/></td>
+
+        </c:forEach>
+    </tr>
+    </tr>
+
+    </thead>
+    </table>
+
     <a href="<c:url value="/user/basket/add?name=${product.name}&productLink=${productLink}&returnUrl=${requestScope['javax.servlet.forward.request_uri']}" />">
         <button class="btn btn-outline-success my-2 my-sm-0">Dodaj do koszyka</button>
     </a>
 
-
+    </div>
 </body>
 </html>

@@ -13,13 +13,21 @@
 <body>
 <custom:header/>
 <div style="max-width:40%; margin-left: auto; margin-right: auto;">
+    <table class="table table-borderless">
     <c:forEach var="result" items="${resultsList}" >
-        <li>
-        <a href="<c:url value="/product?productUrl=${result.url}"/>">
-            <td><c:out value="${result.name}" /></td>
-        </a>
-        </li>
+
+        <thead>
+        <tr>
+            <th scope="col"><img src="data:image/jpg;base64, ${result.image64}"  />
+            <td colspan="5">
+            <a href="<c:url value="/product?productUrl=${result.url}"/>">
+            <c:out value="${result.name}" />
+            </a>
+        </tr>
+
+        </thead>
     </c:forEach>
+    </table>
 
 
 </div>

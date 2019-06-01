@@ -36,7 +36,7 @@ public abstract class Product {
         try{
             BufferedImage bImage = this.image;
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write( bImage, "jpg", baos );
+            ImageIO.write( bImage, "png", baos );
             baos.flush();
             byte[] imageInByteArray = baos.toByteArray();
             baos.close();

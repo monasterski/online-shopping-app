@@ -30,7 +30,7 @@ public enum WebsiteType {
         //TODO
         try {
 
-            BufferedImage image = ImageIO.read(new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png"));
+            BufferedImage image = ImageIO.read(new URL("https://static.thenounproject.com/png/1427-200.png"));
             return new CarProduct("wymyslona nazwa rezultatu", OLX, image, "1000","1234",2001,300000);
         }
         catch(IOException e) {

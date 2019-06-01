@@ -1,6 +1,7 @@
 package main.server.beans.services;
 
 import main.server.controllers.data.AdvancedSearch;
+import main.server.controllers.data.product.CarProduct;
 import main.server.controllers.data.product.Product;
 import main.server.controllers.products.ProductController;
 import main.server.database.dto.ProductData;
@@ -13,8 +14,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
+import javax.imageio.ImageIO;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,12 +28,23 @@ public class ShopWebsiteServiceBean implements ShopWebsiteService {
     @Override
     public List<ProductController.ProductResultList> getProducts(String searchCriteria) throws IOException {
         Document doc = Jsoup.connect("https://www.olx.pl/oferty/q-"+searchCriteria).get();
-        Elements table = doc.select("a.marginright5").select("strong");
+        Elements table = doc.select("tr.wrap");
         List<ProductController.ProductResultList> resultsList = new LinkedList<>();
         for(Element el : table){
             ProductController.ProductResultList result = new ProductController.ProductResultList();
-            result.setName(el.html());
-            result.setUrl(el.parent().attributes().get("href"));
+            result.setName(el.select("a.marginright5").select("strong").html());
+            result.setUrl(el.select("a.marginright5").select("strong").first().parent().attributes().get("href"));
+            try{
+                result.setImage(ImageIO.read(new URL("https://static.thenounproject.com/png/1427-200.png")));
+                result.setImage(ImageIO.read(new URL(el.select("img.fleft").attr("src"))));
+            }
+            catch (java.net.MalformedURLException exc){
+                System.out.println("Incorrect image");
+            }
+            catch(IOException ex) {
+                System.out.println("Incorrect image");
+                ex.printStackTrace();
+            }
             resultsList.add(result);
         }
         return resultsList;

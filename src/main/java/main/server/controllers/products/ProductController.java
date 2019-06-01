@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,6 +50,31 @@ public class ProductController extends AbstractController {
 
         private String name;
         private String url;
+        private BufferedImage image;
+
+        public BufferedImage getImage() {
+            return image;
+        }
+
+        public void setImage(BufferedImage image) {
+            this.image = image;
+        }
+
+        public String getImage64() {
+            try{
+                BufferedImage bImage = this.image;
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write( bImage, "jpg", baos );
+                baos.flush();
+                byte[] imageInByteArray = baos.toByteArray();
+                baos.close();
+                return javax.xml.bind.DatatypeConverter.printBase64Binary(imageInByteArray);
+            }
+            catch(IOException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+        }
 
         public String getName() { return name; }
 
