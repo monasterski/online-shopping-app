@@ -1,11 +1,7 @@
 package main.server.logic.products;
 
-import main.server.controllers.data.AdvancedSearch;
 import main.server.controllers.data.product.CarProduct;
 import main.server.controllers.data.product.Product;
-import main.server.logic.products.websitetypes.AllegroProductConverter;
-import main.server.logic.products.websitetypes.OLXProductConverter;
-import main.server.logic.products.websitetypes.OtomotoProductConverter;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -15,7 +11,7 @@ import java.net.URL;
 public enum WebsiteType {
 
     OLX,
-    OTOMOTO,
+    GRATKA,
     ALLEGRO;
 
 

@@ -1,28 +1,21 @@
 package main.server.beans.services;
 
 import main.server.controllers.data.AdvancedSearch;
-import main.server.controllers.data.product.CarProduct;
 import main.server.controllers.data.product.Product;
 import main.server.controllers.products.ProductController;
-import main.server.database.dto.ProductData;
 import main.server.logic.products.ProductConverter;
 import main.server.logic.products.WebsiteType;
 import main.server.logic.products.websitetypes.AllegroProductConverter;
 import main.server.logic.products.websitetypes.OLXProductConverter;
-import main.server.logic.products.websitetypes.OtomotoProductConverter;
+import main.server.logic.products.websitetypes.GratkaProductConverter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import javax.imageio.ImageIO;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ShopWebsiteServiceBean implements ShopWebsiteService {
     @Override
@@ -73,12 +66,13 @@ public class ShopWebsiteServiceBean implements ShopWebsiteService {
                     resultsList.addAll(converterOlx.getProductsFromSite());
                     break;
 
-                case OTOMOTO:
-                    ProductConverter converterOtomoto = new OtomotoProductConverter(advancedSearch);
-                    resultsList.addAll(converterOtomoto.getProductsFromSite());
+                case GRATKA:
+                    ProductConverter converterGratka = new GratkaProductConverter(advancedSearch);
+                    resultsList.addAll(converterGratka.getProductsFromSite());
                     break;
             }
         }
+        Collections.shuffle(resultsList);
         return resultsList;
     }
 }

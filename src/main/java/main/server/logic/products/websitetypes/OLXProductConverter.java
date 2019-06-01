@@ -73,7 +73,6 @@ public class OLXProductConverter implements ProductConverter {
         List<Product> resultsList = new LinkedList<>();
         for(Element el : table){
             Map<String, String> attributes = new HashMap<>();
-            String name = el.html();
             //<--- name --->
             attributes.put("name", el.select("a.marginright5").select("strong").html());
             //<--- sourceWebsite --->
@@ -146,7 +145,6 @@ public class OLXProductConverter implements ProductConverter {
             resultsList.add(productFactory.createProduct(attributes));
         }
         return resultsList;
-
 
     }
 

@@ -48,7 +48,7 @@ public class AdvancedSearchController extends AbstractController {
     public String advancedSearch(
             @RequestParam(value ="Allegro", required = false)String[] checkboxAllegroVal,
             @RequestParam(value="Olx", required = false)String[] checkboxOLXVal,
-            @RequestParam(value="Otomoto", required = false)String[] checkboxOtomotoVal,
+            @RequestParam(value="Gratka", required = false)String[] checkboxGratkaVal,
             AdvancedSearch advancedSearch,
             Model model){
 
@@ -58,8 +58,8 @@ public class AdvancedSearchController extends AbstractController {
         if(checkboxOLXVal != null){
             advancedSearch.setWebsitesToSearchIn("Olx");
         }
-        if(checkboxOtomotoVal != null){
-            advancedSearch.setWebsitesToSearchIn("Otomoto");
+        if(checkboxGratkaVal != null){
+            advancedSearch.setWebsitesToSearchIn("Gratka");
         }
         model.addAttribute("advancedSearch", advancedSearch);
         model.addAttribute("advancedResultsList", shopService.getAdvancedProductList(advancedSearch));

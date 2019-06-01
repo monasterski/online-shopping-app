@@ -17,23 +17,6 @@ import java.util.Map;
 public class CarProductFactory implements AbstractProductFactory {
 
 
-    private List<String> fieldsNeeded;
-
-    public CarProductFactory() {
-        this.fieldsNeeded = new ArrayList<String>() {
-            {
-                add("name");
-                add("price");
-                add("used");
-                add("contactNumber");
-                add("active");
-                add("vin");
-                add("year");
-                add("mileage");
-            }
-        };
-    }
-
     @Override
     public CarProduct createProduct(Map<String, String> data){
 
@@ -47,8 +30,13 @@ public class CarProductFactory implements AbstractProductFactory {
             BufferedImage image = ImageIO.read(new URL(data.get("image")));
             String price = data.get("price").replaceAll("[^\\d.]+", "");
             int mileage = Integer.parseInt(data.get("mileage").replaceAll("[^\\d.]+", ""));
+            boolean used = true;
+            if(data.containsKey("used")) {
+                if(data.get("used").equals("no"))
+                    used = false;
+            }
             return new CarProduct(data.get("name"), WebsiteType.valueOf(data.get("sourceWebsite")), image,
-                    true, price, data.get("link"), Integer.parseInt(data.get("year")), mileage);
+                    used, price, data.get("link"), Integer.parseInt(data.get("year")), mileage);
         }
         catch (java.net.MalformedURLException exc){
             System.out.println(data.get("image"));
