@@ -23,16 +23,21 @@ public class CarProduct extends Product {
     }
 
 
-    public int getMileage() {
-        return mileage;
+    public String getMileage() {
+
+        if(mileage==-1)
+            return "-";
+        return String.valueOf(mileage);
     }
 
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
 
-    public int getYear() {
-        return year;
+    public String getYear() {
+        if(year==-1)
+            return "-";
+        return String.valueOf(year);
     }
 
     public void setYear(int year) {

@@ -98,8 +98,10 @@ public abstract class Product {
         this.name = name;
     }
 
-    public int getPrice() {
-        return price;
+    public String getPrice() {
+        if(price==-1)
+            return "nieznana";
+        return String.valueOf(price);
     }
 
     public void setPrice(int price) {

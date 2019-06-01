@@ -27,7 +27,7 @@
 
             <thead>
             <tr>
-                <th scope="col" rowspan="3"><img src="data:image/jpg;base64, ${product.image64}"  />
+                <th scope="col" rowspan="3"><img width="300" src="data:image/jpg;base64, ${product.image64}"  />
                 <td colspan="5"><b><c:out value="${product.name}"/></b></td>
                 <tr>
                     <td scope="row">Cena: <c:out value="${product.price}"/></td>
