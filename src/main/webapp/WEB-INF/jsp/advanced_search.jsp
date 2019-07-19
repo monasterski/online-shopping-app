@@ -79,7 +79,7 @@
     <c:url value="/advanced_search_results" var="link"/>
     <sf:form method="POST" modelAttribute="advancedSearch" action="${link}">
         <div class="form-group">
-            <label for="searchTerm">Wyszukaj ogłoszeń</label>
+            <label for="searchTerm" style="font-weight: bold;">Wyszukaj ogłoszeń</label>
             <sf:input path="searchString" type="text" class="form-control" id="searchTerm"/>
         </div>
         <b>Wybierz kategorię wyszukiwanego produktu</b>
@@ -103,7 +103,8 @@
             });
         </script>
 
-        <b>Wybierz strony do przeszukania:</b>
+        <b style="line-height: 2">Wybierz strony do przeszukania:</b>
+
         <style>
             .checkboxElem {
                 transform: scale(2);
@@ -115,7 +116,7 @@
             <c:forEach items="${websiteTypeList}" var="websiteType">
                 <div class="checkbox">
                     <input type="checkbox" name="${websiteType}" class="checkboxElem" id=${websiteType} />
-                    <label class="checkbox-label">${websiteType}</label>
+                    <label class="checkbox-label">&nbsp${websiteType}</label>
                 </div>
             </c:forEach>
         </div>
