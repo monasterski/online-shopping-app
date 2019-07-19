@@ -1,6 +1,4 @@
-package main.server.logic.products;
-
-import main.server.controllers.data.product.Product;
+package main.server.logic.products.abstractions;
 
 import java.util.Map;
 

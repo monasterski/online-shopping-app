@@ -1,11 +1,12 @@
 package main.server.logic.products.websitetypes;
 
 import main.server.controllers.data.AdvancedSearch;
-import main.server.controllers.data.product.Product;
-import main.server.controllers.data.product.ProductCategory;
-import main.server.logic.products.AbstractProductFactory;
-import main.server.logic.products.ProductConverter;
-import main.server.logic.products.producttypes.VehicleProductFactory;
+import main.server.logic.products.abstractions.Product;
+import main.server.logic.products.enums.ProductCategory;
+import main.server.logic.products.abstractions.AbstractProductFactory;
+import main.server.logic.products.abstractions.ProductConverter;
+import main.server.logic.products.factories.ClothingProductFactory;
+import main.server.logic.products.factories.VehicleProductFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -104,7 +105,51 @@ public class GratkaProductConverter implements ProductConverter {
         return resultsList;
     }
 
-    private List<Product> getClothingProductsFromGratka() {
-        return new ArrayList<>();
+    private List<Product> getClothingProductsFromGratka() throws IOException {
+        //Parameters needed:
+        //name;
+        //sourceWebsite
+        //offerLink
+        //image
+        //price;
+        //used;
+        //size;
+        //type;
+        String seachTerm = advancedSearch.getSearchString();
+        AbstractProductFactory productFactory = new ClothingProductFactory();
+
+        List<Product> resultsList = new ArrayList<>();
+        Map<String, String> attributes = new HashMap<>();
+        Document doc = Jsoup.connect("https://gratka.pl/oferty/q/"+seachTerm).get();
+        Elements offers = doc
+                .select("article.teaser ");
+        for(Element offer : offers) {
+            //<--- name --->
+            String title = offer.select("a.teaser__anchor").attr("title");
+            attributes.put("name", title.substring("Przejdź do ogłoszenia: ".length()));
+            //<--- sourceWebsite --->
+            attributes.put("sourceWebsite", "GRATKA");
+            //<--- image --->
+            String imageHTML = offer.select("div.teaser__foto").html();
+            String imageSRC = imageHTML.substring(imageHTML.indexOf("https://"),imageHTML.indexOf("\" alt="));
+            attributes.put("image", imageSRC);
+            if(attributes.get("image").equals(""))
+                attributes.put("image", "https://static.thenounproject.com/png/1427-200.png");
+            //<--- price --->
+            attributes.put("price", offer.select("p.teaser__price").text());
+            //<--- offerLink --->
+            String offerLink = offer.select("a.teaser__anchor").attr("href");
+            attributes.put("link", offerLink);
+            Document oneVehicleDoc = Jsoup.connect(offerLink).get();
+            //<--- used --->
+            attributes.put("used", "yes");
+            //<--- year --->
+            attributes.put("size", "-");
+            //<--- mileage --->
+            attributes.put("type", "-");
+
+            resultsList.add(productFactory.createProduct(attributes));
+        }
+        return resultsList;
     }
 }

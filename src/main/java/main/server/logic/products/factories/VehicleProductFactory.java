@@ -1,8 +1,8 @@
-package main.server.logic.products.producttypes;
+package main.server.logic.products.factories;
 
-import main.server.controllers.data.product.VehicleProduct;
-import main.server.logic.products.AbstractProductFactory;
-import main.server.logic.products.WebsiteType;
+import main.server.logic.products.producttypes.VehicleProduct;
+import main.server.logic.products.abstractions.AbstractProductFactory;
+import main.server.logic.products.enums.WebsiteType;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 
-public class VehicleProductFactory implements AbstractProductFactory {
+public class  VehicleProductFactory implements AbstractProductFactory {
 
 
     @Override

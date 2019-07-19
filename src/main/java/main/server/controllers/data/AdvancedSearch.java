@@ -1,7 +1,7 @@
 package main.server.controllers.data;
 
-import main.server.controllers.data.product.ProductCategory;
-import main.server.logic.products.WebsiteType;
+import main.server.logic.products.enums.ProductCategory;
+import main.server.logic.products.enums.WebsiteType;
 
 import java.util.HashSet;
 import java.util.Set;

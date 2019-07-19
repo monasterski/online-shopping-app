@@ -1,8 +1,8 @@
-package main.server.controllers.data.product;
+package main.server.logic.products.enums;
 
-import main.server.logic.products.AbstractProductFactory;
-import main.server.logic.products.producttypes.ClothingProductFactory;
-import main.server.logic.products.producttypes.VehicleProductFactory;
+import main.server.logic.products.abstractions.AbstractProductFactory;
+import main.server.logic.products.factories.ClothingProductFactory;
+import main.server.logic.products.factories.VehicleProductFactory;
 
 public enum ProductCategory {
     VEHICLE(new VehicleProductFactory()),

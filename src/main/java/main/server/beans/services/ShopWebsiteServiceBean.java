@@ -1,10 +1,10 @@
 package main.server.beans.services;
 
 import main.server.controllers.data.AdvancedSearch;
-import main.server.controllers.data.product.Product;
+import main.server.logic.products.abstractions.Product;
 import main.server.controllers.products.ProductController;
-import main.server.logic.products.ProductConverter;
-import main.server.logic.products.WebsiteType;
+import main.server.logic.products.abstractions.ProductConverter;
+import main.server.logic.products.enums.WebsiteType;
 import main.server.logic.products.websitetypes.AllegroProductConverter;
 import main.server.logic.products.websitetypes.OLXProductConverter;
 import main.server.logic.products.websitetypes.GratkaProductConverter;

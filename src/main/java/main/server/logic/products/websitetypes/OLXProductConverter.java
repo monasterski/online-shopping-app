@@ -1,11 +1,12 @@
 package main.server.logic.products.websitetypes;
 
 import main.server.controllers.data.AdvancedSearch;
-import main.server.controllers.data.product.Product;
-import main.server.controllers.data.product.ProductCategory;
-import main.server.logic.products.AbstractProductFactory;
-import main.server.logic.products.ProductConverter;
-import main.server.logic.products.producttypes.VehicleProductFactory;
+import main.server.logic.products.abstractions.Product;
+import main.server.logic.products.enums.ProductCategory;
+import main.server.logic.products.abstractions.AbstractProductFactory;
+import main.server.logic.products.abstractions.ProductConverter;
+import main.server.logic.products.factories.ClothingProductFactory;
+import main.server.logic.products.factories.VehicleProductFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -145,7 +146,69 @@ public class OLXProductConverter implements ProductConverter {
 
     }
 
-    private List<Product> getClothingProductsFromSite() {
-        return new ArrayList<>();
+    private List<Product> getClothingProductsFromSite() throws IOException {
+
+        //Parameters needed:
+        //name;
+        //sourceWebsite
+        //image
+        //price;
+        //used;
+        //contactNumber;
+        //active;
+        //vin;
+        //type;
+        //size;
+        String seachTerm = advancedSearch.getSearchString();
+        AbstractProductFactory productFactory = new ClothingProductFactory();
+
+        Document doc = Jsoup.connect("https://www.olx.pl/oferty/q-"+seachTerm).get();
+        Elements table = doc.select("tr.wrap");
+        List<Product> resultsList = new LinkedList<>();
+        for(Element el : table){
+            Map<String, String> attributes = new HashMap<>();
+            //<--- name --->
+            attributes.put("name", el.select("a.marginright5").select("strong").html());
+            //<--- sourceWebsite --->
+            attributes.put("sourceWebsite", "OLX");
+            //<--- image --->
+            attributes.put("image", el.select("img.fleft").attr("src"));
+            if(attributes.get("image").equals(""))
+                attributes.put("image", "https://static.thenounproject.com/png/1427-200.png");
+            //<--- link --->
+            Document oneClothingDoc = Jsoup.connect(el.select("a.marginright5").attr("href")).get();
+            attributes.put("link", oneClothingDoc.location());
+            //<--- --->
+            Elements elemOlx;
+            try {
+                //<--- type --->
+                elemOlx = oneClothingDoc
+                        .select(".details td.col")
+                        .select("tr:matches(Rodzaj)").first()
+                        .select("td.value").select("strong");
+                if(elemOlx.text().equals(""))
+                    continue;
+                attributes.put("type", elemOlx.text());
+                //<--- size --->
+                elemOlx = oneClothingDoc
+                        .select(".details td.col")
+                        .select("tr:matches(Rozmiar)").first()
+                        .select("td.value").select("strong");
+                if(elemOlx.text().equals(""))
+                    continue;
+                attributes.put("size", elemOlx.text());
+            }
+            catch (NullPointerException ex) {
+                //Product found is not a vehicle
+                continue;
+            }
+            //<--- price --->
+            elemOlx = oneClothingDoc
+                    .select(".price-label strong");
+            attributes.put("price", elemOlx.text());
+
+            resultsList.add(productFactory.createProduct(attributes));
+        }
+        return resultsList;
     }
 }

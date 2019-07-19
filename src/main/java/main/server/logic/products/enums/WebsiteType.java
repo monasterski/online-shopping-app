@@ -1,7 +1,7 @@
-package main.server.logic.products;
+package main.server.logic.products.enums;
 
-import main.server.controllers.data.product.VehicleProduct;
-import main.server.controllers.data.product.Product;
+import main.server.logic.products.abstractions.Product;
+import main.server.logic.products.producttypes.VehicleProduct;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

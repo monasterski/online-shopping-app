@@ -1,10 +1,10 @@
 package main.server.logic.products.websitetypes;
 
 import main.server.controllers.data.AdvancedSearch;
-import main.server.controllers.data.product.Product;
-import main.server.controllers.data.product.ProductCategory;
-import main.server.logic.products.AbstractProductFactory;
-import main.server.logic.products.ProductConverter;
+import main.server.logic.products.abstractions.Product;
+import main.server.logic.products.enums.ProductCategory;
+import main.server.logic.products.abstractions.AbstractProductFactory;
+import main.server.logic.products.abstractions.ProductConverter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,10 @@
-package main.server.controllers.data.product;
+package main.server.logic.products.producttypes;
 
 
-import main.server.logic.products.WebsiteType;
+import main.server.logic.products.abstractions.Additional;
+import main.server.logic.products.abstractions.Product;
+import main.server.logic.products.enums.WebsiteType;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class VehicleProduct extends Product {

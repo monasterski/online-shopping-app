@@ -1,11 +1,9 @@
-package main.server.controllers.data.product;
+package main.server.logic.products.abstractions;
 
-import main.server.logic.products.WebsiteType;
+import main.server.logic.products.enums.WebsiteType;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -62,7 +60,7 @@ public abstract class Product {
     private static HashMap<Class<? extends Product>,List<String>> additionalFieldsMap = new HashMap<>();
     private List<String> additionalFields;
 
-    Product(String name, BufferedImage image, int price, boolean used, String linkToOffer, WebsiteType website){
+    public Product(String name, BufferedImage image, int price, boolean used, String linkToOffer, WebsiteType website){
         this.name = name;
         this.image = image;
         this.price = price;
@@ -72,7 +70,7 @@ public abstract class Product {
         intiAdditionalFields();
     }
 
-    Product(){
+    public Product(){
         intiAdditionalFields();
     }
 
@@ -135,6 +133,8 @@ public abstract class Product {
         Map<String, String> dict = new HashMap<>();
         dict.put("year", "Rok");
         dict.put("mileage", "Przebieg");
+        dict.put("size", "Rozmiar");
+        dict.put("type", "Rodzaj");
         return dict.get(additionalField);
     }
 
