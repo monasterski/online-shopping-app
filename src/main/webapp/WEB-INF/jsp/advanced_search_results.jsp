@@ -13,6 +13,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background: url('https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
+    </style>
 
 </head>
 <body>
@@ -22,7 +31,7 @@
         <h2>Wyszukiwanie zaawansowane</h2>
 
 
-        <table class="table table-borderless">
+        <table class="table table-borderless" style="background-color:#B8CCD3; color: black">
         <c:forEach var="product" items="${advancedResultsList}" varStatus="products">
 
             <thead>

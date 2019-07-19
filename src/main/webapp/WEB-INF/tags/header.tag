@@ -12,13 +12,13 @@
 <body>
 
     <div style="max-width:60%; margin-left:auto; margin-right:auto">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #A7BAC1; border-radius: 10px;">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="<c:url value="/shop" />">Sklep</a>
+      <a class="navbar-brand" style="font-weight: bold" href="<c:url value="/shop" />">Sklep</a>
 
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <div class="collapse navbar-collapse" style="font-weight: bold" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item active">
             <a class="nav-link" href="<c:url value="/user/account" />">Konto<span class="sr-only">(current)</span></a>
@@ -33,17 +33,17 @@
             <c:url value="/search" var="link"/>
             <sf:form method="POST" class="form-inline" modelAttribute="search" action="${link}">
                 <sf:input path="searchString" type="text" class="form-control"/>
-                <input id="button" class="btn btn-outline-success my-2 my-sm-0" style="margin-left:0%" value="Szukaj" type="submit"/>
+                <input id="button" class="btn btn-outline-dark my-2 my-sm-0" style="margin-left:0%;font-weight: bold;" value="Szukaj" type="submit"/>
             </sf:form>
         </div>
           <div style="padding-right: 5%" class="form-inline my-2 my-lg-0">
               <a href="<c:url value="/advanced_search_form" />">
-                  <button class="btn btn-outline-success my-2 my-sm-0">Wyszukiwanie zaawansowane</button>
+                  <button class="btn btn-outline-dark my-2 my-sm-0" style="font-weight: bold">Wyszukiwanie zaawansowane</button>
               </a>
           </div>
         <div class="form-inline my-2 my-lg-0">
           <a href="<c:url value="/user/basket" />">
-             <button class="btn btn-outline-success my-2 my-sm-0">Moje produkty</button>
+             <button class="btn btn-outline-dark my-2 my-sm-0" style="font-weight: bold">Moje produkty</button>
           </a>
         </div>
       </div>

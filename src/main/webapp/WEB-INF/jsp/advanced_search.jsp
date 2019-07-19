@@ -16,6 +16,53 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
 
+    <style>
+        body {
+            background: url('https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
+        #overlay {
+            position: absolute;
+            border-radius: 50px;
+            display: none;
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            background-color: rgba(7, 56, 60, 0.9);
+            z-index: 2;
+            cursor: pointer;
+        }
+        #popup1 {
+            position: absolute;
+            top: 50%;
+            left: 40%;
+        }
+        #popup2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+        #popup3 {
+            position: absolute;
+            top: 50%;
+            left: 60%;
+        }
+
+        #text{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            font-family: Cambria;
+            font-size: 40px;
+            color: white;
+            transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+        }
+    </style>
 </head>
 <body>
 <custom:header/>
@@ -73,8 +120,33 @@
             </c:forEach>
         </div>
 
-        <button type="submit" class="btn btn-primary">Szukaj</button>
+        <button type="submit"
+                class="btn btn-primary"
+                onclick="DisplayProgressMessage();">Szukaj</button>
     </sf:form>
 
+    <div id="overlay" onclick="HideProgressMessage()">
+        <div id="text">Trwa zbieranie wyników...</div>
+        <div id="popup1" class="spinner-grow text-light" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div id="popup2" class="spinner-grow text-light" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div id="popup3" class="spinner-grow text-light" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+
+    </div>
+
 </div>
+
+<script>
+    function DisplayProgressMessage() {
+        document.getElementById("overlay").style.display = "block";
+    }
+    function HideProgressMessage() {
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
 </html>

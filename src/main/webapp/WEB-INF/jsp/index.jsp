@@ -5,6 +5,15 @@
 <%@ taglib prefix="custom" uri="/WEB-INF/custom.tld"%>
 <html lang="en">
     <head>
+        <style>
+            body {
+                background: url('https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg') no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                background-size: cover;
+                -o-background-size: cover;
+            }
+        </style>
 
     </head>
     <body>
