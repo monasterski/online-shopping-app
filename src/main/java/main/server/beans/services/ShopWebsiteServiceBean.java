@@ -18,6 +18,30 @@ import java.net.URL;
 import java.util.*;
 
 public class ShopWebsiteServiceBean implements ShopWebsiteService {
+
+    AdvancedSearch advancedSearch;
+    List<Product> productList;
+
+    @Override
+    public void addProductList(List<Product> productList){
+        this.productList = productList;
+    }
+
+    @Override
+    public List<Product> getProductList(){
+        return this.productList;
+    }
+
+    @Override
+    public void addAdvancedSearch(AdvancedSearch advancedSearch) {
+        this.advancedSearch = advancedSearch;
+    }
+
+    @Override
+    public AdvancedSearch getAdvancedSearch(){
+        return this.advancedSearch;
+    }
+
     @Override
     public List<ProductController.ProductResultList> getProducts(String searchCriteria) throws IOException {
         Document doc = Jsoup.connect("https://www.olx.pl/oferty/q-"+searchCriteria).get();

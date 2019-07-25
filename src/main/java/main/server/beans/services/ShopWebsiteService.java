@@ -15,4 +15,11 @@ public interface ShopWebsiteService {
 
     Product getProductDetails(String url) throws IOException;
 
+    void addProductList(List<Product> productList);
+
+    List<Product> getProductList();
+
+    void addAdvancedSearch(AdvancedSearch advancedSearch);
+
+    AdvancedSearch getAdvancedSearch();
 }

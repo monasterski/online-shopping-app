@@ -21,7 +21,7 @@
         <custom:header />
         <div style="text-align:center;" class="container">
             <h6 style="font-size: 4em; margin-top: 10%; margin-left:auto; margin-right:auto;">
-                Welcome to our page!
+                Witamy na naszej stronie!
             </h6>
         </div>
     </body>
