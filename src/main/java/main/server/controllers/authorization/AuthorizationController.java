@@ -40,10 +40,25 @@ public class AuthorizationController extends AbstractController {
         return "register";
     }
 
+    @RequestMapping(value = "/registerErrExists", method = RequestMethod.GET)
+    public String getRegisterErr(Model model){
+        model.addAttribute("user",new User());
+        return "registerErrExists";
+    }
+
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public String postRegister(User user){
         if(authorizationService.isUserRegistered(user.getUsername()))
-            return "redirect:/register";
+            return "redirect:/registerErrExists";
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        authorizationService.registerUser(user);
+        return redirect("/login");
+    }
+
+    @RequestMapping(value = "/registerErrExists",method = RequestMethod.POST)
+    public String postRegisterErr(User user){
+        if(authorizationService.isUserRegistered(user.getUsername()))
+            return "redirect:/registerErrExists";
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         authorizationService.registerUser(user);
         return redirect("/login");
