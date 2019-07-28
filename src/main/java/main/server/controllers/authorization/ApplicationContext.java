@@ -21,7 +21,7 @@ public class ApplicationContext {
         return user;
     }
 
-    void initContext(UserData user){
+    public void initContext(UserData user){
         this.user = user;
         basket = new Basket();
         basket.setProducts(productRepository.getProducts(user.getUsername()));

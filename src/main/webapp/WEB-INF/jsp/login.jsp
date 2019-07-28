@@ -39,6 +39,10 @@
         </a>
       </div>
     </sf:form>
+    <form action="${pageContext.request.contextPath}/signin/facebook" method="POST">
+        <input type="hidden" name="scope" value="public_profile" />
+        <input type="submit" value="Login using Facebook"/>
+    </form>
     </div>
 
 </body>
