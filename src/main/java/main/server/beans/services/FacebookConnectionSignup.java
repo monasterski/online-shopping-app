@@ -32,6 +32,7 @@ public class FacebookConnectionSignup implements ConnectionSignUp {
         user.setUsername(userName);
         user.setPassword(RandomStringUtils.randomAlphabetic(8));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setUserUrl(connection.getImageUrl());
         authorizationService.registerUser(user);
         context.initContext(userRepository.getItem(userName));
         return user.getUsername();

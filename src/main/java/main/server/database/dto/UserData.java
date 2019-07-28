@@ -18,6 +18,16 @@ public class UserData extends AbstractData {
     private String password;
     @Column(name = "USER_ROLE")
     private int userRole;
+    @Column(name = "USER_URL")
+    private String userUrl;
+
+    public String getUserUrl() {
+        return userUrl;
+    }
+
+    public void setUserUrl(String userUrl) {
+        this.userUrl = userUrl;
+    }
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "userId")
     private Set<ProductData> products;

@@ -24,6 +24,7 @@
 <custom:header/>
 <div style="max-width:20%; margin-top: 10%; margin-left: auto; margin-right: auto;">
     <h2>Zalogowany użytkownik:</h2>
+    <img style="max-height: 50px; max-width: 50px" src="${user.userUrl}"  />
     <h3><c:out value="${user.username}"/></h3>
 
 

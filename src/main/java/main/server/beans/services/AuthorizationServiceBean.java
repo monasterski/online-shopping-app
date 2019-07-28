@@ -15,7 +15,7 @@ public class AuthorizationServiceBean implements AuthorizationService {
         UserData data = userRepository.getItem(username);
         if(data == null)
             return null;
-        return new User(data.getUsername(),data.getPassword());
+        return new User(data.getUsername(),data.getPassword(), data.getUserUrl());
     }
 
     @Override
@@ -23,6 +23,7 @@ public class AuthorizationServiceBean implements AuthorizationService {
         UserData data = new UserData();
         data.setUsername(user.getUsername());
         data.setPassword(user.getPassword());
+        data.setUserUrl(user.getUserUrl());
         if(!isUserRegistered(user.getUsername()))
             userRepository.createItem(data);
         return data.getId();
