@@ -77,4 +77,11 @@ public class AuthorizationController extends AbstractController {
         }
         throw new IllegalArgumentException("Access token is not valid");
     }
+    @RequestMapping(value = "/user/initContextFb",method = RequestMethod.GET)
+    private String initFb(
+            @RequestParam("username") String username
+    ){
+        getApplicationContext().initContext(userRepository.getItem(username));
+        return redirect("/user/account");
+    }
 }

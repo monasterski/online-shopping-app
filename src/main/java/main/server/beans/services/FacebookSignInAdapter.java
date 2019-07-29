@@ -21,6 +21,6 @@ public class FacebookSignInAdapter implements SignInAdapter {
                         connection.getDisplayName(), null,
                         Arrays.asList(new SimpleGrantedAuthority("FACEBOOK_USER"))));
 
-        return null;
+        return "/user/initContextFb?username=" + localUserId;
     }
 }

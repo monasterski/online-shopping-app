@@ -19,12 +19,6 @@ public class FacebookConnectionSignup implements ConnectionSignUp {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private ApplicationContext context;
-
-    @Autowired
-    private UserRepository userRepository;
-
     @Override
     public String execute(Connection<?> connection) {
         User user = new User();
@@ -34,7 +28,6 @@ public class FacebookConnectionSignup implements ConnectionSignUp {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setUserUrl(connection.getImageUrl());
         authorizationService.registerUser(user);
-        context.initContext(userRepository.getItem(userName));
         return user.getUsername();
     }
 }
