@@ -3,7 +3,12 @@ package main.server.controllers.products;
 
 import main.server.beans.services.ShopWebsiteService;
 import main.server.controllers.AbstractController;
+import main.server.controllers.data.AdvancedSearch;
 import main.server.controllers.data.Search;
+import main.server.controllers.data.Sort;
+import main.server.logic.products.abstractions.Product;
+import main.server.logic.products.enums.ProductCategory;
+import main.server.logic.products.enums.WebsiteType;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -21,8 +26,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class ProductController extends AbstractController {
@@ -40,9 +47,21 @@ public class ProductController extends AbstractController {
         return "product";
     }
 
+
+
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String search(Search search, Model model) throws IOException {
-        model.addAttribute("resultsList", shopService.getProducts(search.getSearchString()));
+    public String search(Search search, Model model){
+
+
+        ProductCategory productCategory = ProductCategory.CLOTHING;
+        Set<WebsiteType > websitesToSearchIn = new HashSet<>();
+        websitesToSearchIn.add(WebsiteType.OLX);
+        websitesToSearchIn.add(WebsiteType.GRATKA);
+
+        AdvancedSearch advancedSearch = new AdvancedSearch(search.getSearchString(), productCategory,websitesToSearchIn);
+
+        List<Product> productResultList = shopService.getAdvancedProductList(advancedSearch);
+        model.addAttribute("productResultList", productResultList);
         return "results";
     }
 

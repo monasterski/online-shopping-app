@@ -34,7 +34,6 @@
         <td>Używany: <c:out value="${product.used}"/></td>
 
     <tr>
-        <td scope="row">Numer kontaktowy: <c:out value="${product.contactNumber}"/></td>
         <c:forEach var="poleDodatkowe" items="${product.additionalFields}" varStatus="fields">
 
             <s:eval expression="product.${poleDodatkowe}" var="prd" />

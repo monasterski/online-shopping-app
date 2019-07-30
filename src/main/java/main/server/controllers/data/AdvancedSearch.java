@@ -20,6 +20,12 @@ public class AdvancedSearch extends Search{
         this.websitesToSearchIn = new HashSet<>();
     }
 
+    public AdvancedSearch(String searchString, ProductCategory productCategory, Set<WebsiteType> websitesToSearchIn) {
+        super(searchString);
+        this.productCategory = productCategory;
+        this.websitesToSearchIn = websitesToSearchIn;
+    }
+
     public void setProductCategory(String productCategory) {
         this.productCategory = ProductCategory.valueOf(productCategory.toUpperCase());
     }

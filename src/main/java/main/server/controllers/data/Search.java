@@ -8,6 +8,11 @@ public class Search {
         return searchString;
     }
 
+    public Search(){}
+    public Search(String searchString){
+        this.searchString = searchString;
+    }
+
     public void setSearchString(String searchString) {
         this.searchString = searchString;
     }

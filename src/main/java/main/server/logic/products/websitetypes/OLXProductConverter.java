@@ -199,8 +199,7 @@ public class OLXProductConverter implements ProductConverter {
                 attributes.put("size", elemOlx.text());
             }
             catch (NullPointerException ex) {
-                //Product found is not a vehicle
-                continue;
+                //Product found is not a clothing
             }
             //<--- price --->
             elemOlx = oneClothingDoc
