@@ -80,7 +80,7 @@ public abstract class AbstractRepository<DATA> {
     private void init(){
         if(id == null) {
             try {
-                file = new File(applicationContext.getResource("classpath:sequence").getFile().getAbsolutePath());
+                file = new File("sequence");
                 FileReader reader = new FileReader(file);
                 BufferedReader br = new BufferedReader(reader);
                 id =  Long.parseLong(br.readLine());
