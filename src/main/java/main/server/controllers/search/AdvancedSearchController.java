@@ -87,8 +87,8 @@ public class AdvancedSearchController extends AbstractController {
             List<Integer> mileageList = new ArrayList<>();
             for(Product product : productList){
                 VehicleProduct vProduct = (VehicleProduct) product;
-                yearList.add(Integer.parseInt(vProduct.getYear()));
-                mileageList.add(Integer.parseInt(vProduct.getMileage()));
+                yearList.add(Integer.parseInt(vProduct.getYear().replace('-','0')));
+                mileageList.add(Integer.parseInt(vProduct.getMileage().replace('-','0')));
             }
             Collections.sort(yearList);
             Collections.sort(mileageList);
