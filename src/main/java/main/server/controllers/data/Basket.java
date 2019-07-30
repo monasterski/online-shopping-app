@@ -16,6 +16,10 @@ public class Basket {
         products.add(product);
     }
 
+    public void removeProduct(ProductData product){
+        products.remove(product);
+    }
+
     public List<ProductData> getProducts() {
         return new LinkedList<>(products);
     }

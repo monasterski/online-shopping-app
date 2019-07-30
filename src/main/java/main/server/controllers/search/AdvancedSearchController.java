@@ -179,10 +179,20 @@ public class AdvancedSearchController extends AbstractController {
         }
         else{
             List<ClothingProduct> clothingProducts = productResultList.stream().map(ClothingProduct.class::cast).collect(Collectors.toList());
-            if(!sort.getType().equals("wybierz"))
-                clothingProducts = clothingProducts.stream().filter(product -> product.getType().equals(sort.getType())).collect(Collectors.toList());
-            if(!sort.getSize().equals("wybierz"))
-                clothingProducts = clothingProducts.stream().filter(product -> product.getSize().equals(sort.getSize())).collect(Collectors.toList());
+            if(!sort.getType().equals(""))
+                clothingProducts = clothingProducts.stream()
+                        .filter(product ->
+                                product.getType() != null &&
+                                product.getType().equals(sort.getType())
+                        )
+                        .collect(Collectors.toList());
+            if(!sort.getSize().equals(""))
+                clothingProducts = clothingProducts.stream()
+                        .filter(product ->
+                                product.getSize() != null &&
+                                product.getSize().equals(sort.getSize())
+                        )
+                        .collect(Collectors.toList());
             productResultList = clothingProducts.stream().map(Product.class::cast).collect(Collectors.toList());
         }
         List<List<String>> additionalFieldsValues = getAdditionalValsLists(productResultList, shopService.getAdvancedSearch());

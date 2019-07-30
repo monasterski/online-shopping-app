@@ -62,4 +62,18 @@ public class BasketController extends AbstractController {
                 additional2));
         return redirect("/user/basket");
     }
+
+    @RequestMapping(value ="/basket/delete")
+    public String basketDelete(
+            @RequestParam("base64String") String base64String
+
+    ) throws IOException, ClassNotFoundException {
+        final byte[] objToBytes = Base64.getUrlDecoder().decode(base64String);
+        ByteArrayInputStream bais = new ByteArrayInputStream(objToBytes);
+        ObjectInputStream ois = new ObjectInputStream(bais);
+        ProductData product = (ProductData) ois.readObject();
+        productRepository.deleteItem(product);
+        getApplicationContext().getBasket().removeProduct(product);
+        return redirect("/user/basket");
+    }
 }

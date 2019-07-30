@@ -45,6 +45,13 @@
                     <th scope="col" rowspan="3">
 
                         <img style="max-height: 300px; max-width: 300px" src="${product.productImage}" >
+                        <br />
+                        <a href="<c:url value="/user/basket/delete?base64String=${product.base64String}" />">
+
+                            <button class="btn btn-dark btn-sm">
+                                <i class="fa fa-minus-circle"></i> Usuń z koszyka
+                            </button>
+                        </a>
                     </th>
                     <td colspan="5"><b><c:out value="${product.name}"/></b></td>
                 <tr>

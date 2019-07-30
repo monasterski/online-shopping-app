@@ -56,6 +56,13 @@ public abstract class AbstractRepository<DATA> {
         return data;
     }
 
+    @Transactional
+    public DATA deleteItem(DATA data){
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(data);
+        return data;
+    }
+
     private static Long id = null;
     private static File file = null;
     public static Long getId(){

@@ -3,6 +3,10 @@ package main.server.database.dto;
 import main.server.database.AbstractData;
 
 import javax.persistence.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.Base64;
 
 @Entity
 @Table(name = "PRODUCTS")
@@ -73,6 +77,14 @@ public class ProductData extends AbstractData {
     }
 
     public ProductData(){}
+
+    public String getBase64String() throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(this);
+        oos.flush();
+        return Base64.getUrlEncoder().encodeToString(baos.toByteArray());
+    }
 
     @Override
     public Long getId() {

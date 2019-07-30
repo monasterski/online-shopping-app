@@ -139,7 +139,7 @@
                             <div class="dropdown">
                                 <sf:select name="priceButton" path="size" type="button" class="selectpicker" data-toggle="dropdown">
                                     <div class="dropdown-menu">
-                                        <sf:option class="dropdown-item" href="#" value="wybierz"/>
+<%--                                        <sf:option class="dropdown-item" href="#" value="wybierz"/>--%>
                                         <c:forEach items="${additionalField1Values}" var="additionalFieldVal">
                                             <sf:option class="dropdown-item" href="#" value="${additionalFieldVal}"/>
                                         </c:forEach>
@@ -162,7 +162,7 @@
                             <div class="dropdown">
                                 <sf:select name="priceButton" path="type" type="button" class="selectpicker" data-toggle="dropdown">
                                     <div class="dropdown-menu">
-                                        <sf:option class="dropdown-item" href="#" value="wybierz"/>
+<%--                                        <sf:option class="dropdown-item" href="#" value="wybierz"/>--%>
                                         <c:forEach items="${additionalField2Values}" var="additionalFieldVal">
                                             <sf:option class="dropdown-item" href="#" value="${additionalFieldVal}"/>
                                         </c:forEach>
@@ -207,6 +207,7 @@
                     </c:choose>
 
                     <img style="max-height: 300px; max-width: 300px" src="${product.image}" >
+                    <br />
                     <a href="<c:url value="/user/basket/add?base64=${product.base64String}&additional1=${additional1}&additional2=${additional2}" />">
 
                         <button class="btn btn-dark btn-sm">
