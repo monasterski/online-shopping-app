@@ -27,7 +27,7 @@
     <thead>
     <tr>
         <th scope="col" rowspan="3"><img src="data:image/jpg;base64, ${product.image64}"  />
-        <td colspan="5"><b><c:out value="${product.name}"/></b></td>
+        <td colspan="5"><b><c:out value="${product.productName}"/></b></td>
     <tr>
         <td scope="row">Cena: <c:out value="${product.price}"/></td>
         <td>Oferta z: <c:out value="${product.sourceWebsite}"/></td>
@@ -46,7 +46,7 @@
     </thead>
     </table>
 
-    <a href="<c:url value="/user/basket/add?name=${product.name}&productLink=${productLink}&returnUrl=${requestScope['javax.servlet.forward.request_uri']}" />">
+    <a href="<c:url value="/user/basket/add?name=${product.productName}&productLink=${productLink}&returnUrl=${requestScope['javax.servlet.forward.request_uri']}" />">
         <button class="btn btn-outline-success my-2 my-sm-0">Dodaj do koszyka</button>
     </a>
 

@@ -16,24 +16,63 @@ public class ProductData extends AbstractData {
     @JoinColumn(name = "USER_ID")
     private Long userId;
 
-    @Column(name = "PRODUCT_LINK")
-    private String productLink;
-
     @Column(name = "PRODUCT_NAME")
     private String name;
 
-    @Column(name = "PRODUCT_QUANTITY")
-    private int quantity;
+    @Column(name = "PRODUCT_IMAGE")
+    private String productImage;
 
-    public ProductData(String name,String productLink){
+    @Column(name = "PRODUCT_PRICE")
+    private Double price;
+
+    @Column(name = "PRODUCT_ISUSED")
+    private byte used;
+
+    @Column(name = "PRODUCT_LINK")
+    private String productLink;
+
+    @Column(name = "PRODUCT_SOURCE")
+    private String sourceWebsite;
+
+    @Column(name = "PRODUCT_TYPE")
+    private String productType;
+
+    @Column(name = "PRODUCT_ADDITIONAL1")
+    private String additional1;
+
+    @Column(name = "PRODUCT_ADDITIONAL2")
+    private String additional2;
+
+    public String getUsedString(){
+        if(used==1){
+            return "tak";
+        }
+        else {
+            return "nie";
+        }
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
+
+    public ProductData(String name, String productImage, Double price, byte used, String productLink, String sourceWebsite, String productType, String additional1, String additional2) {
         this.name = name;
+        this.productImage = productImage;
+        this.price = price;
+        this.used = used;
         this.productLink = productLink;
-        this.quantity = 1;
+        this.sourceWebsite = sourceWebsite;
+        this.productType = productType;
+        this.additional1 = additional1;
+        this.additional2 = additional2;
     }
 
-    public ProductData(){
-        this.quantity = 1;
-    }
+    public ProductData(){}
 
     @Override
     public Long getId() {
@@ -45,6 +84,14 @@ public class ProductData extends AbstractData {
         this.id = id;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     public String getName() {
         return name;
     }
@@ -53,12 +100,28 @@ public class ProductData extends AbstractData {
         this.name = name;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getProductImage() {
+        return productImage;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public byte getUsed() {
+        return used;
+    }
+
+    public void setUsed(byte used) {
+        this.used = used;
     }
 
     public String getProductLink() {
@@ -69,12 +132,28 @@ public class ProductData extends AbstractData {
         this.productLink = productLink;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getSourceWebsite() {
+        return sourceWebsite;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setSourceWebsite(String sourceWebsite) {
+        this.sourceWebsite = sourceWebsite;
+    }
+
+    public String getAdditional1() {
+        return additional1;
+    }
+
+    public void setAdditional1(String additional1) {
+        this.additional1 = additional1;
+    }
+
+    public String getAdditional2() {
+        return additional2;
+    }
+
+    public void setAdditional2(String additional2) {
+        this.additional2 = additional2;
     }
 
     @Override

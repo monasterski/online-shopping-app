@@ -16,7 +16,7 @@ public class ClothingProduct extends Product {
 
     public ClothingProduct(){}
 
-    public ClothingProduct(String name, WebsiteType sourceWebsite, BufferedImage image, boolean used, String price, String linkToOffer, String size, String type){
+    public ClothingProduct(String name, WebsiteType sourceWebsite, String image, boolean used, String price, String linkToOffer, String size, String type){
         //TODO REMOVE only for testing
         super(name, image, Integer.parseInt(price), used, linkToOffer, sourceWebsite);
         this.size = size;

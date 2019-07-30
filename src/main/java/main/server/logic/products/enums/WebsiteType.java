@@ -24,14 +24,7 @@ public enum WebsiteType {
 
     public Product getProduct(String url) {
         //TODO
-        try {
 
-            BufferedImage image = ImageIO.read(new URL("https://static.thenounproject.com/png/1427-200.png"));
-            return new VehicleProduct("wymyslona nazwa rezultatu", OLX, image, true, "1000","1234",2001,300000);
-        }
-        catch(IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return new VehicleProduct("wymyslona nazwa rezultatu", OLX, "https://static.thenounproject.com/png/1427-200.png", true, "1000","1234",2001,300000);
     }
 }

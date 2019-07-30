@@ -16,7 +16,7 @@ public class VehicleProduct extends Product {
 
     public VehicleProduct(){}
 
-    public VehicleProduct(String name, WebsiteType sourceWebsite, BufferedImage image, boolean used, String price, String linkToOffer, int year, int mileage){
+    public VehicleProduct(String name, WebsiteType sourceWebsite, String image, boolean used, String price, String linkToOffer, int year, int mileage){
         //TODO REMOVE only for testing
         super(name, image, Integer.parseInt(price), used, linkToOffer, sourceWebsite);
         this.year = year;

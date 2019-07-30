@@ -18,29 +18,17 @@ public class ClothingProductFactory implements AbstractProductFactory {
 
         //ClothingProduct(String name, WebsiteType sourceWebsite, BufferedImage image, boolean used, String price, String linkToOffer, String size, String type)
 
-        try{
+        String price = data.get("price").replaceAll("[^\\d.]+", "");
+        if(price.equals(""))
+            price = "-1";
 
-            BufferedImage image = ImageIO.read(new URL(data.get("image")));
-            String price = data.get("price").replaceAll("[^\\d.]+", "");
-            if(price.equals(""))
-                price = "-1";
+        boolean used = true;
+        if(data.containsKey("used")) {
+            if(data.get("used").equals("no"))
+                used = false;
+        }
+        return new ClothingProduct(data.get("name"), WebsiteType.valueOf(data.get("sourceWebsite")), data.get("image"),
+                used, price, data.get("link"),data.get("size") , data.get("type"));
 
-            boolean used = true;
-            if(data.containsKey("used")) {
-                if(data.get("used").equals("no"))
-                    used = false;
-            }
-            return new ClothingProduct(data.get("name"), WebsiteType.valueOf(data.get("sourceWebsite")), image,
-                    used, price, data.get("link"),data.get("size") , data.get("type"));
-        }
-        catch (java.net.MalformedURLException exc){
-            System.out.println(data.get("image"));
-        }
-        catch(IOException ex) {
-            System.out.println(data.get("image"));
-            ex.printStackTrace();
-        }
-
-        return null;
     }
 }

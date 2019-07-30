@@ -39,8 +39,8 @@
 
             <thead>
             <tr>
-                <th scope="col" rowspan="3"><img style="max-height: 300px; max-width: 300px" src="data:image/jpg;base64, ${product.image64}"  />
-                <td colspan="5"><b><c:out value="${product.name}"/></b></td>
+                <th scope="col" rowspan="3"><img style="max-height: 300px; max-width: 300px" src="${product.image}"  />
+                <td colspan="5"><b><c:out value="${product.productName}"/></b></td>
                 <tr>
                     <td scope="row">Cena: <c:out value="${product.price}"/></td>
                     <td>Oferta z: <c:out value="${product.sourceWebsite}"/></td>

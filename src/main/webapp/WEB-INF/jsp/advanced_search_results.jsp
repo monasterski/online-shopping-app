@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <style>
         body {
             background: url('https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg') no-repeat center center fixed;
@@ -192,8 +193,28 @@
 
             <thead>
             <tr>
-                <th scope="col" rowspan="3"><img style="max-height: 300px; max-width: 300px" src="data:image/jpg;base64, ${product.image64}"  />
-                <td colspan="5"><b><c:out value="${product.name}"/></b></td>
+
+                <th scope="col" rowspan="3">
+                    <c:choose>
+                        <c:when test="${advancedSearch.productCategory.name().equals(vehicleString)}">
+                            <s:eval expression="product.year" var="additional1" />
+                            <s:eval expression="product.mileage" var="additional2" />
+                        </c:when>
+                        <c:when test="${advancedSearch.productCategory.name().equals(clothingString)}">
+                            <s:eval expression="product.size" var="additional1" />
+                            <s:eval expression="product.type" var="additional2" />
+                        </c:when>
+                    </c:choose>
+
+                    <img style="max-height: 300px; max-width: 300px" src="${product.image}" >
+                    <a href="<c:url value="/user/basket/add?base64=${product.base64String}&additional1=${additional1}&additional2=${additional2}" />">
+
+                        <button class="btn btn-dark btn-sm">
+                            <i class="fa fa-plus-circle"></i> Dodaj do koszyka
+                        </button>
+                    </a>
+                </th>
+                <td colspan="5"><b><c:out value="${product.productName}"/></b></td>
                 <tr>
                     <td scope="row">Cena: <c:out value="${product.price}"/></td>
                     <td>Oferta z: <c:out value="${product.sourceWebsite}"/></td>

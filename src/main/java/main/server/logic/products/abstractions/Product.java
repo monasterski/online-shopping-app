@@ -2,22 +2,25 @@ package main.server.logic.products.abstractions;
 
 import main.server.logic.products.enums.WebsiteType;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.List;
 
-public abstract class Product {
+public class Product implements Serializable {
 
-    private String name;
-    private BufferedImage image;
+    private String productName;
+    private String image;
     private int price;
-    private int quantity;
     private boolean used;
     private String linkToOffer;
+    private WebsiteType sourceWebsite;
+
 
     public String getLinkToOffer() {
         return linkToOffer;
@@ -27,41 +30,37 @@ public abstract class Product {
         this.linkToOffer = linkToOffer;
     }
 
-    //Czy jest produkt na sprzedaż
-    private boolean active;
-    private WebsiteType sourceWebsite;
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 
     public String getSourceWebsite() {
         return sourceWebsite.name();
+    }
+
+    public String getBase64String() throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(this);
+        oos.flush();
+        return Base64.getUrlEncoder().encodeToString(baos.toByteArray());
     }
 
     public void setSourceWebsite(WebsiteType sourceWebsite) {
         this.sourceWebsite = sourceWebsite;
     }
 
-    public String getImage64() {
-        try{
-            BufferedImage bImage = this.image;
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write( bImage, "png", baos );
-            baos.flush();
-            byte[] imageInByteArray = baos.toByteArray();
-            baos.close();
-            String b64 = javax.xml.bind.DatatypeConverter.printBase64Binary(imageInByteArray);
-            return b64;
-        }
-        catch(IOException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
 
     private static HashMap<Class<? extends Product>,List<String>> additionalFieldsMap = new HashMap<>();
     private List<String> additionalFields;
 
-    public Product(String name, BufferedImage image, int price, boolean used, String linkToOffer, WebsiteType website){
-        this.name = name;
+    public Product(String productName, String image, int price, boolean used, String linkToOffer, WebsiteType website){
+        this.productName = productName;
         this.image = image;
         this.price = price;
         this.used = used;
@@ -88,12 +87,12 @@ public abstract class Product {
         this.additionalFields = additionalFieldsMap.get(this.getClass());
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getPrice() {
@@ -106,19 +105,18 @@ public abstract class Product {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     public String isUsed() {
 
         if(used)
             return "tak";
         return "nie";
+    }
+
+    public String getUsed() {
+        if(used)
+            return "1";
+        return "0";
     }
 
     public void setUsed(boolean used) {
@@ -138,11 +136,4 @@ public abstract class Product {
         return dict.get(additionalField);
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 }
