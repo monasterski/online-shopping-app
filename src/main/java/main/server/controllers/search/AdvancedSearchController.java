@@ -43,7 +43,8 @@ public class AdvancedSearchController extends AbstractController {
         for(WebsiteType websiteType : WebsiteType.values()){
             String websiteTypeName = websiteType.name().toLowerCase();
             websiteTypeName = websiteTypeName.substring(0,1).toUpperCase() + websiteTypeName.substring(1);
-            websiteTypeList.add(websiteTypeName);
+            if(!websiteTypeName.equals("Allegro"))
+                websiteTypeList.add(websiteTypeName);
         }
         model.addAttribute("websiteTypeList", websiteTypeList);
         return "advanced_search";
