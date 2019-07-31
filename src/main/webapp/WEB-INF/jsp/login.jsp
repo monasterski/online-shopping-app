@@ -87,7 +87,7 @@
         </a>
       </div>
     </sf:form>
-    <form action="${pageContext.request.contextPath}/signin/facebook" method="POST">
+    <form action="https://online-shopping-app-tai.herokuapp.com/signin/facebook" method="POST">
         <button style="margin-left:5%" type="submit" class="loginBtn loginBtn--facebook">
           Login with Facebook
         </button>
